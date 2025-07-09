@@ -165,7 +165,7 @@ Items: {
 
 	Fetters: {
 		DisplayName: Fetters
-		Tooltip: 3 defense
+		Tooltip: ""
 	}
 
 	PrisonScroll: {

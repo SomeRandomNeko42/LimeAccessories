@@ -248,6 +248,37 @@ namespace LimeAccessories.Items
 			return true;
 		}
 	}
-	
-	
+	[AutoloadEquip(EquipType.Neck)]
+	public class SweettoothNecklace : ModItem
+	{
+		public override void SetDefaults()
+		{
+			Item.DefaultToAccessory(22, 30);
+			Item.rare = ItemRarityID.LightRed;
+			Item.value = Item.sellPrice(0, 3, 0, 0);
+		}
+		public override void AddRecipes()
+		{
+			Recipe recipe = CreateRecipe(1);
+			recipe.AddIngredient(ItemID.HoneyComb);
+			recipe.AddIngredient(ItemID.SharkToothNecklace);
+			recipe.AddIngredient(ItemID.PanicNecklace);
+			Recipe recipe1 = CreateRecipe(1);
+			recipe1.AddIngredient(ItemID.SweetheartNecklace);
+			recipe1.AddIngredient(ItemID.SharkToothNecklace);
+			recipe1.AddTile(TileID.TinkerersWorkbench);
+			recipe1.Register();
+			Recipe recipe2 = CreateRecipe(1);
+			recipe2.AddIngredient(ItemID.StingerNecklace);
+			recipe2.AddIngredient(ItemID.PanicNecklace);
+			recipe2.AddTile(TileID.TinkerersWorkbench);
+			recipe2.Register();
+		}
+		public override void UpdateAccessory(Player player, bool hideVisual)
+		{
+			player.panic = true;
+			player.honeyCombItem = Item;
+			player.GetArmorPenetration<GenericDamageClass>() += 5;
+		}
+	}
 }
