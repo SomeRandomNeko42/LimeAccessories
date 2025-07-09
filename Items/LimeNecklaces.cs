@@ -263,6 +263,8 @@ namespace LimeAccessories.Items
 			recipe.AddIngredient(ItemID.HoneyComb);
 			recipe.AddIngredient(ItemID.SharkToothNecklace);
 			recipe.AddIngredient(ItemID.PanicNecklace);
+			recipe.AddTile(TileID.TinkerersWorkbench);
+			recipe.Register();
 			Recipe recipe1 = CreateRecipe(1);
 			recipe1.AddIngredient(ItemID.SweetheartNecklace);
 			recipe1.AddIngredient(ItemID.SharkToothNecklace);
