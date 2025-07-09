@@ -59,9 +59,21 @@ namespace LimeAccessories
 			}
 			if (proj.DamageType == DamageClass.Summon && AttemptToActivatePrisonScroll())
 			{
-				target.AddBuff(BuffID.ShadowFlame, 90);
-				target.AddBuff(BuffID.Ichor, 90);
-				target.AddBuff(BuffID.CursedInferno, 90);
+				switch (Main._rand.Next(4))
+				{
+					case 0:
+						target.AddBuff(BuffID.ShadowFlame, Main._rand.Next(80, 100));
+						break;
+					case 1:
+						target.AddBuff(BuffID.Ichor, Main._rand.Next(80, 100));
+						break;
+					case 2:
+						target.AddBuff(BuffID.CursedInferno, Main._rand.Next(80,100));
+						break;
+					case 3:
+						Main.LocalPlayer.AddBuff(ModContent.BuffType<SpiritStrike>(), Main._rand.Next(100, 150));
+						break;
+				}
 			}
 		}
 		public override void OnHurt(Player.HurtInfo info)
@@ -72,12 +84,14 @@ namespace LimeAccessories
 			}
 			if (!Player.HasBuff<SpiritRegen>() && !Player.HasBuff<SpiritGuard>() && AttemptToActivatePrisonScroll())
 			{
-				if (Main._rand.NextBool())
+				switch (Main._rand.Next(2))
 				{
-					Player.AddBuff(ModContent.BuffType<SpiritRegen>(), Main._rand.Next(40, 80));
-				} else
-				{
-					Player.AddBuff(ModContent.BuffType<SpiritGuard>(), Main._rand.Next(60, 120));
+					case 0:
+						Player.AddBuff(ModContent.BuffType<SpiritRegen>(), Main._rand.Next(40, 80));
+						break;
+					case 1:
+						Player.AddBuff(ModContent.BuffType<SpiritGuard>(), Main._rand.Next(120, 240));
+						break;
 				}
 			}
 		}

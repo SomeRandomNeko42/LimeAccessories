@@ -14,9 +14,20 @@ namespace LimeAccessories.Buffs
 	}
 	public class SpiritGuard : ModBuff
 	{
+		public override void Update(NPC npc, ref int buffIndex)
+		{
+			npc.defense *= 2;
+		}
 		public override void Update(Player player, ref int buffIndex)
 		{
 			player.statDefense *= 2;
+		}
+	}
+	public class SpiritStrike : ModBuff
+	{
+		public override void Update(Player player, ref int buffIndex)
+		{
+			player.GetDamage<SummonDamageClass>() += 0.25f;
 		}
 	}
 }

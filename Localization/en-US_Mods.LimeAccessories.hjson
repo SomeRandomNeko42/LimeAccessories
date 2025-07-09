@@ -216,4 +216,9 @@ Buffs: {
 		DisplayName: Spirit Regen
 		Description: Rapidly healing! [c/00ff00:'We're right here to support you!']
 	}
+
+	SpiritStrike: {
+		DisplayName: Spirit Strike
+		Description: Increased summon damage! [c/00ff00:'Take them down for us!']
+	}
 }
