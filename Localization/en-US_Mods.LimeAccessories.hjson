@@ -1,0 +1,219 @@
+Items: {
+	GreenObsidianHorseshoeBalloon: {
+		Tooltip:
+			'''
+			Allows the holder to double jump 
+			Increases jump height and negates fall damage 
+			Grants immunity to fire blocks
+			'''
+		DisplayName: Green Obsidian Horseshoe Balloon
+	}
+
+	PinkObsidianHorseshoeBalloon: {
+		Tooltip:
+			'''
+			Allows the holder to double jump 
+			Increases jump height and negates fall damage 
+			Grants immunity to fire blocks
+			'''
+		DisplayName: Pink Obsidian Horseshoe Balloon
+	}
+
+	AmberObsidianHorseshoeBalloon: {
+		Tooltip:
+			'''
+			Releases bees and douses the user in honey when damaged
+			Increases jump height and negates fall damage 
+			Grants immunity to fire blocks
+			'''
+		DisplayName: Amber Obsidian Horseshoe Balloon
+	}
+
+	BlueObsidianHorseshoeBalloon: {
+		Tooltip:
+			'''
+			Allows the holder to double jump 
+			Increases jump height and negates fall damage 
+			Grants immunity to fire blocks
+			'''
+		DisplayName: Blue Obsidian Horseshoe Balloon
+	}
+
+	WhiteObsidianHorseshoeBalloon: {
+		Tooltip:
+			'''
+			Allows the holder to double jump 
+			Increases jump height and negates fall damage 
+			Grants immunity to fire blocks
+			'''
+		DisplayName: White Obsidian Horseshoe Balloon
+	}
+
+	YellowObsidianHorseshoeBalloon: {
+		Tooltip:
+			'''
+			Allows the holder to double jump 
+			Increases jump height and negates fall damage 
+			Grants immunity to fire blocks
+			'''
+		DisplayName: Yellow Obsidian Horseshoe Balloon
+	}
+
+	BundleOfObsidianHorseshoeBalloons: {
+		Tooltip:
+			'''
+			Allows the holder to quadruple jump 
+			Increases jump height and negates fall damage
+			Grants immunity to fire blocks
+			'''
+		DisplayName: Bundle Of Obsidian Horseshoe Balloons
+	}
+
+	SearedFlower: {
+		Tooltip:
+			'''
+			10% reduced mana cost
+			10% increased magic damage
+			Your magic attacks burn enemies
+			Automatically use mana potions when needed
+			Enemies are less likely to target you
+			Grants immunity to fire blocks, Burning and Hellfire
+			Reduces damage from touching lava
+			'I just want it all to [c/ff0000:Burn]'
+			'''
+		DisplayName: Seared Flower
+	}
+
+	HypnotistsPendant: {
+		DisplayName: Hypnotist's Pendant
+		Tooltip:
+			'''
+			Grants immunity to Confusion, Silence and Cursed
+			Has a chance to create illusions and dodge an attack
+			Temporarily increase critical chance after dodge
+			May confuse nearby enemies after being struck
+			Increases movement speed and acceleration
+			Provides light when worn
+			10% Increased damage
+			'Somehow, the light is a different color in a camera, must be due to its effect on the brain'
+			'''
+	}
+
+	EarthOmamori: {
+		DisplayName: Charm of Earth
+		Tooltip:
+			'''
+			Only one elemental charm can be equipped at a time
+			6 defense
+			For each 25% of your health missing, gain 2 additional defense, up to a total of 12 from this item
+			You may not take more then 50% of your max HP in damage from a single attack
+			Grants immunity to knockback
+			'The stone knows not the mountains permanence'
+			'''
+	}
+
+	FlameOmamori: {
+		DisplayName: Charm of Flame
+		Tooltip:
+			'''
+			Only one elemental charm can be equipped at a time
+			Grants a increasing damage modifier inversely based on your health, up to a maximum of +50% damage
+			    No effect until 70% HP or less
+			Grants immunity to fire and limited immunity to lava
+			'Theres nothing more dangerous then someone whose out of options'
+			'''
+	}
+
+	AncientOmamori: {
+		DisplayName: Ancient Charm
+		Tooltip:
+			'''
+			Only one elemental charm can be equipped at a time
+			You may not take more then 90% of your max HP in damage from a single attack
+			'Looks old, like much of its power has faded...'
+			'''
+	}
+
+	WaterOmamori: {
+		DisplayName: Charm of Water
+		Tooltip:
+			'''
+			Only one elemental charm can be equipped at a time
+			Provides life regen and reduces the cooldown of healing potions by 25%
+			When under 50% health, doubles the life regen provided by this item
+			When under 25% health, triples it instead
+			Increases maximum life by 100
+			Increased invincibility frames and movement speed after taking damage
+			You may not take more then 80% of your max HP in damage from a single attack
+			'Nothing can't be fixed'
+			'''
+	}
+
+	AirOmamori: {
+		DisplayName: Charm of Air
+		Tooltip:
+			'''
+			Only one elemental charm can be equipped at a time
+			15% Increased movement speed
+			Increases jump height and negates fall damage
+			Grants 50% more wing time, provided wings are equipped.
+			Taking damage recharges 25% of max wing time, provided wings are equipped.
+			You may not take more then 80% of your max HP in damage from a single attack
+			'Dont let them strike you down, use them to boost yourself up.'
+			'''
+	}
+
+	Fetters: {
+		DisplayName: Fetters
+		Tooltip: 3 defense
+	}
+
+	PrisonScroll: {
+		DisplayName: Sealing Scroll
+		Tooltip:
+			'''
+			Increases your max number of minions by 2
+			Increases your summon damage by 20% and the knockback of your minions
+			[c/cd89fa:Spirits may come to your aid in combat]
+			'You can hear voices whispering from the scroll, seems like they want revenge...'
+			'Long ago, scrolls like these were used to seal away powerful beings, near indestructible from the inside, but so fragile on the outside'
+			'''
+	}
+
+	MassiveBundleOfObsidianHorseshoeBalloons: {
+		Tooltip:
+			'''
+			Allows the holder to sextuple jump 
+			Increases jump height and negates fall damage
+			Grants immunity to fire blocks
+			Releases bees and douses the user in honey when damaged
+			'this is getting excessive'
+			'''
+		DisplayName: Massive Bundle Of Obsidian Horseshoe Balloons
+	}
+}
+
+Configs: {
+	LimeClientConfig: {
+		DisplayName: Client Config
+
+		DebugMode: {
+			Label: Debug Mode
+			Tooltip: Replaces some flavor text to show debug values instead
+		}
+	}
+
+	LimeServerConfig.DisplayName: Server Config
+}
+
+Buffs: {
+	SpiritGuard: {
+		DisplayName: Spirit Guard
+		Description: Doubled defense! [c/00ff00:'You cant die yet!']
+	}
+
+	SpiritRegen: {
+		DisplayName: Spirit Regen
+		Description: Rapidly healing! [c/00ff00:'We're right here to support you!']
+	}
+}
