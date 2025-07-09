@@ -1,3 +1,6 @@
-/bin
-/obj
-/[Pp]roperties
+/bin/
+/obj/
+/[Pp]roperties/
+/.vs/
+*.csproj
+*.sln
