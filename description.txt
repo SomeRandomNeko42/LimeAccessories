@@ -1,3 +1,5 @@
 Adds new accessories that I feel like adding.
 
-(you've been scammed!, they're not actually lime)
+(you've been scammed! they're not actually lime)
+
+GitHub: https://github.com/SomeRandomNeko42/LimeAccessories
