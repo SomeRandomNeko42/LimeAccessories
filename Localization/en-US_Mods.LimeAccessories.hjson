@@ -183,11 +183,11 @@ Items: {
 	MassiveBundleOfObsidianHorseshoeBalloons: {
 		Tooltip:
 			'''
+			Releases bees and douses the user in honey when damaged
 			Allows the holder to sextuple jump 
 			Increases jump height and negates fall damage
 			Grants immunity to fire blocks
-			Releases bees and douses the user in honey when damaged
-			'this is getting excessive'
+			'This is getting excessive'
 			'''
 		DisplayName: Massive Bundle Of Obsidian Horseshoe Balloons
 	}
