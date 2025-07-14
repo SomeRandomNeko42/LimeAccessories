@@ -31,7 +31,7 @@ namespace LimeAccessories.GlobalNPCs
 		}
 		public override void ModifyShop(NPCShop shop)
 		{
-			shop.Add(ModContent.ItemType<AncientOmamori>(), [Condition.Hardmode, Condition.MoonPhasesEven]);
+			shop.Add(ModContent.ItemType<AncientOmamori>(), [Condition.DownedSkeletron, Condition.MoonPhasesEven]);
 		}
 	}
 }
