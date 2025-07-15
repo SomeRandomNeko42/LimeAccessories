@@ -16,7 +16,7 @@ namespace LimeAccessories.GlobalNPCs
 		public override void SetupTravelShop(int[] shop, ref int nextSlot)
 		{
 			int omamori = ModContent.ItemType<AncientOmamori>();
-			if (!shop.Contains(omamori) && Main._rand.NextBool(1, 10))
+			if (!shop.Contains(omamori) && Main._rand.NextBool(1, 6))
 			{
 				shop[nextSlot] = omamori;
 				nextSlot++;
