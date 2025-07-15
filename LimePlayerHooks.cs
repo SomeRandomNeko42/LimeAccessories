@@ -66,9 +66,9 @@ namespace LimeAccessories
 				int attemptedHeal = damageDone / 10;
 				if (Player.lifeSteal < attemptedHeal)
 				{
-					attemptedHeal = (int)MathF.Ceiling(Player.lifeSteal);
-					Player.lifeSteal = 0;
-				} else { Player.lifeSteal -= attemptedHeal; }
+					attemptedHeal = (int)Player.lifeSteal;
+				}
+				Player.lifeSteal -= attemptedHeal;
 				if (attemptedHeal > 0) Player.Heal(attemptedHeal);
 			}
 		}
@@ -102,11 +102,11 @@ namespace LimeAccessories
 		{
 			if (LeachScarfEquipped || LeachScarfPunishment > 0)
 			{
-				healValue /= 2;
+				healValue /= 4;
 			}
 			if (VampireScarfEquipped || VampireScarfPunishment > 0)
 			{
-				healValue = (int)(healValue / (2f / 3f));
+				healValue /= 2;
 			}
 		}
 		public override void OnHurt(Player.HurtInfo info)
