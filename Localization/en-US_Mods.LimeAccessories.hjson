@@ -200,6 +200,28 @@ Items: {
 			'''
 		DisplayName: Sweettooth Necklace
 	}
+
+	LeachScarf: {
+		Tooltip:
+			'''
+			Decreases the amount healing potions heal by 50%, This effect will continue for 30 seconds after unequipped
+			Increases lifesteal by 10%
+			'Sorry, but I've overcome that weakness long ago. Now I love salt!'
+			'Was the flavor the problem?'
+			'''
+		DisplayName: Leach Scarf
+	}
+
+	VampiricWormScarf: {
+		Tooltip:
+			'''
+			Decreases the amount healing potions heal by 33%, This effect will continue for 30 seconds after unequipped
+			Increases lifesteal by 10%
+			Decreases damage taken by 17%
+			'Its worrying to wrap it around your neck, but at the same time, its so soft...'
+			'''
+		DisplayName: Vampiric Worm Scarf
+	}
 }
 
 Configs: {

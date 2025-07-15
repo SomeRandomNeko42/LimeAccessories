@@ -1,11 +1,9 @@
-﻿using LimeAccessories.Common.Config;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
-using tModPorter;
 
 namespace LimeAccessories.Items
 {
@@ -281,6 +279,63 @@ namespace LimeAccessories.Items
 			player.panic = true;
 			player.honeyCombItem = Item;
 			player.GetArmorPenetration<GenericDamageClass>() += 5;
+		}
+	}
+	[AutoloadEquip(EquipType.Neck)]
+	public class LeachScarf : ModItem
+	{
+		public override void SetDefaults()
+		{
+			Item.DefaultToAccessory(28, 28);
+			Item.rare = ItemRarityID.Orange;
+			Item.value = Item.sellPrice(0, 1, 0, 0);
+		}
+		public override void AddRecipes()
+		{
+			Recipe recipe = CreateRecipe(1);
+			recipe.AddIngredient(ItemID.WormTooth, 5);
+			recipe.AddIngredient(ItemID.GlowingMushroom, 40);
+			recipe.AddIngredient(ItemID.Silk, 20);
+			recipe.AddIngredient(ItemID.BandofRegeneration, 1);
+			recipe.AddTile(TileID.Loom);
+			recipe.Register();
+		}
+		public override void UpdateAccessory(Player player, bool hideVisual)
+		{
+			LimePlayerHooks limePlayerHooks = player.GetModPlayer<LimePlayerHooks>();
+			limePlayerHooks.LeachScarfEquipped = true;
+			limePlayerHooks.LeachScarfPunishment = 60 * 30;
+		}
+	}
+	public class VampiricWormScarf: ModItem
+	{
+		public override void SetDefaults()
+		{
+			Item.DefaultToAccessory(28, 28);
+			Item.expert = true;
+			Item.value = Item.sellPrice(0, 3, 0, 0);
+			Item.neckSlot = 8; // Worm scarf
+		}
+		public override void AddRecipes()
+		{
+			Recipe recipe = CreateRecipe(1);
+			recipe.AddIngredient(ItemID.WormScarf, 1);
+			recipe.AddIngredient<LeachScarf>(1);
+			recipe.AddIngredient(ItemID.SoulofNight, 10);
+			recipe.AddTile(TileID.DemonAltar);
+			recipe.Register();
+		}
+		public override void UpdateAccessory(Player player, bool hideVisual)
+		{
+			LimePlayerHooks limePlayerHooks = player.GetModPlayer<LimePlayerHooks>();
+			limePlayerHooks.VampireScarfPunishment = 60 * 30;
+			limePlayerHooks.VampireScarfEquipped = true;
+			player.endurance += 0.17f;
+		}
+		public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
+		{
+			if (incomingItem.type == ItemID.WormScarf || incomingItem.type == ModContent.ItemType<LeachScarf>()) return false;
+			return true;
 		}
 	}
 }

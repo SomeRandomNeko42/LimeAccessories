@@ -11,7 +11,12 @@ namespace LimeAccessories
 		public bool SearedFlowerEquipped;
 		public int OmamoriEquipped;
 		public bool AirOmamoriEquipped;
-		
+
+		public bool LeachScarfEquipped;
+		public bool VampireScarfEquipped;
+		public int LeachScarfPunishment;
+		public int VampireScarfPunishment;
+
 		public bool PrisionScrollEquipped;
 		public int PrisionScrollActiveness = 0;
 
@@ -38,7 +43,11 @@ namespace LimeAccessories
 			SearedFlowerEquipped = false;
 			AirOmamoriEquipped = false;
 			PrisionScrollEquipped = false;
+			LeachScarfEquipped = false;
+			VampireScarfEquipped = false;
 			if (PrisionScrollActiveness > 0) PrisionScrollActiveness -= 1;
+			if (LeachScarfPunishment > 0) LeachScarfPunishment -= 1;
+			if (VampireScarfPunishment > 0) VampireScarfPunishment -= 1;
 			OmamoriEquipped = 0;
 			base.ResetEffects();
 		}
@@ -49,6 +58,19 @@ namespace LimeAccessories
 		public override void UpdateEquips()
 		{
 			if (AirOmamoriEquipped)	Player.wingTimeMax = (int)(Player.wingTimeMax * 1.5f);
+		}
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+		{
+			if ((LeachScarfEquipped || VampireScarfEquipped) && target.canGhostHeal)
+			{
+				int attemptedHeal = damageDone / 10;
+				if (Player.lifeSteal < attemptedHeal)
+				{
+					attemptedHeal = (int)MathF.Ceiling(Player.lifeSteal);
+					Player.lifeSteal = 0;
+				} else { Player.lifeSteal -= attemptedHeal; }
+				if (attemptedHeal > 0) Player.Heal(attemptedHeal);
+			}
 		}
 		public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
 		{
@@ -74,6 +96,17 @@ namespace LimeAccessories
 						Main.LocalPlayer.AddBuff(ModContent.BuffType<SpiritStrike>(), Main._rand.Next(100, 150));
 						break;
 				}
+			}
+		}
+		public override void GetHealLife(Item item, bool quickHeal, ref int healValue)
+		{
+			if (LeachScarfEquipped || LeachScarfPunishment > 0)
+			{
+				healValue /= 2;
+			}
+			if (VampireScarfEquipped || VampireScarfPunishment > 0)
+			{
+				healValue = (int)(healValue / (2f / 3f));
 			}
 		}
 		public override void OnHurt(Player.HurtInfo info)
