@@ -100,6 +100,7 @@ namespace LimeAccessories
 			if (OmamoriEquipped != 0)
 			{
 				modifiers.SetMaxDamage((int)(MathF.Round(Player.statLifeMax2 / 100f * OmamoriEquipped)));
+				modifiers.SetMaxDamage((int)(MathF.Round(Player.statLifeMax2 / 100f * (OmamoriEquipped + (modifiers.Dodgeable ? 0 : 20)))));
 			}
 		}
 	}
