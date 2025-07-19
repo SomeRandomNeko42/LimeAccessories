@@ -66,6 +66,15 @@ namespace LimeAccessories.Items
 			}
 			return true;
 		}
+		public override void AddRecipes()
+		{
+			Recipe ToLavaCharm = Recipe.Create(ItemID.LavaCharm, 1);
+			ToLavaCharm.AddIngredient<AncientOmamori>();
+			ToLavaCharm.AddIngredient(ItemID.HellstoneBar, 10);
+			ToLavaCharm.AddIngredient(ItemID.Bone, 20);
+			ToLavaCharm.AddTile(TileID.Hellforge);
+			ToLavaCharm.Register();
+		}
 	}
 	public class FlameOmamori : ModItem
 	{
