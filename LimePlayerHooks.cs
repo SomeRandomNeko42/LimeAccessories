@@ -9,9 +9,16 @@ namespace LimeAccessories
 	public class LimePlayerHooks : ModPlayer 
 	{
 		public bool SearedFlowerEquipped;
+		public bool HellsSunEquipped;
+
 		public int OmamoriEquipped;
 		public bool AirOmamoriEquipped;
-		
+
+		public bool LeachScarfEquipped;
+		public bool VampireScarfEquipped;
+		public int LeachScarfPunishment;
+		public int VampireScarfPunishment;
+
 		public bool PrisionScrollEquipped;
 		public int PrisionScrollActiveness = 0;
 
@@ -36,11 +43,23 @@ namespace LimeAccessories
 		public override void ResetEffects()
 		{
 			SearedFlowerEquipped = false;
-			AirOmamoriEquipped = false;
-			PrisionScrollEquipped = false;
-			if (PrisionScrollActiveness > 0) PrisionScrollActiveness -= 1;
+			HellsSunEquipped = false;
+
 			OmamoriEquipped = 0;
-			base.ResetEffects();
+			AirOmamoriEquipped = false;
+
+			PrisionScrollEquipped = false;
+
+			LeachScarfEquipped = false;
+			VampireScarfEquipped = false;
+			
+		}
+
+		public override void PreUpdate()
+		{
+			if (PrisionScrollActiveness > 0) PrisionScrollActiveness -= 1;
+			if (LeachScarfPunishment > 0) LeachScarfPunishment -= 1;
+			if (VampireScarfPunishment > 0) VampireScarfPunishment -= 1;
 		}
 		public override void UpdateDead()
 		{
@@ -50,18 +69,58 @@ namespace LimeAccessories
 		{
 			if (AirOmamoriEquipped)	Player.wingTimeMax = (int)(Player.wingTimeMax * 1.5f);
 		}
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+		{
+			if ((LeachScarfEquipped || VampireScarfEquipped) && target.canGhostHeal)
+			{
+				int attemptedHeal = damageDone / 10;
+				if (Player.lifeSteal < attemptedHeal)
+				{
+					attemptedHeal = (int)Player.lifeSteal;
+				}
+				Player.lifeSteal -= attemptedHeal;
+				if (attemptedHeal > 0) Player.Heal(attemptedHeal);
+			}
+		}
 		public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
 		{
-			if (proj.DamageType == DamageClass.Magic && SearedFlowerEquipped && !proj.coldDamage)
+			if (proj.DamageType == DamageClass.Magic && HellsSunEquipped || (SearedFlowerEquipped && !proj.coldDamage))
 			{
 				target.AddBuff(BuffID.OnFire, 60);
 				target.AddBuff(BuffID.OnFire3, 60);
+				if (HellsSunEquipped)
+				{
+					target.AddBuff(BuffID.CursedInferno, 90);
+				}
 			}
 			if (proj.DamageType == DamageClass.Summon && AttemptToActivatePrisonScroll())
 			{
-				target.AddBuff(BuffID.ShadowFlame, 90);
-				target.AddBuff(BuffID.Ichor, 90);
-				target.AddBuff(BuffID.CursedInferno, 90);
+				switch (Main._rand.Next(4))
+				{
+					case 0:
+						target.AddBuff(BuffID.ShadowFlame, Main._rand.Next(80, 100));
+						break;
+					case 1:
+						target.AddBuff(BuffID.Ichor, Main._rand.Next(80, 100));
+						break;
+					case 2:
+						target.AddBuff(BuffID.CursedInferno, Main._rand.Next(80,100));
+						break;
+					case 3:
+						Main.LocalPlayer.AddBuff(ModContent.BuffType<SpiritStrike>(), Main._rand.Next(100, 150));
+						break;
+				}
+			}
+		}
+		public override void GetHealLife(Item item, bool quickHeal, ref int healValue)
+		{
+			if (LeachScarfEquipped || LeachScarfPunishment > 0)
+			{
+				healValue /= 4;
+			}
+			if (VampireScarfEquipped || VampireScarfPunishment > 0)
+			{
+				healValue /= 2;
 			}
 		}
 		public override void OnHurt(Player.HurtInfo info)
@@ -72,12 +131,14 @@ namespace LimeAccessories
 			}
 			if (!Player.HasBuff<SpiritRegen>() && !Player.HasBuff<SpiritGuard>() && AttemptToActivatePrisonScroll())
 			{
-				if (Main._rand.NextBool())
+				switch (Main._rand.Next(2))
 				{
-					Player.AddBuff(ModContent.BuffType<SpiritRegen>(), Main._rand.Next(40, 80));
-				} else
-				{
-					Player.AddBuff(ModContent.BuffType<SpiritGuard>(), Main._rand.Next(60, 120));
+					case 0:
+						Player.AddBuff(ModContent.BuffType<SpiritRegen>(), Main._rand.Next(40, 80));
+						break;
+					case 1:
+						Player.AddBuff(ModContent.BuffType<SpiritGuard>(), Main._rand.Next(120, 240));
+						break;
 				}
 			}
 		}

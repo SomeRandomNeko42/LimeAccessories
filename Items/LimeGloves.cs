@@ -15,6 +15,7 @@ namespace LimeAccessories.Items
 			Item.value = Item.sellPrice(0, 0, 25, 0);
 			Item.handOffSlot = 3;
 			Item.handOnSlot = 8;
+			Item.defense = 3;
 		}
 		public override void AddRecipes()
 		{
@@ -29,10 +30,6 @@ namespace LimeAccessories.Items
 			ToMagicCuffs.AddIngredient(ItemID.ManaRegenerationBand, 1);
 			ToMagicCuffs.AddTile(TileID.TinkerersWorkbench);
 			ToMagicCuffs.Register();
-		}
-		public override void UpdateAccessory(Player player, bool hideVisual)
-		{
-			player.statDefense += 3;
 		}
 	}
 }
