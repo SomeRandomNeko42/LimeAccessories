@@ -146,13 +146,14 @@ namespace LimeAccessories.Items
 			recipe.AddIngredient<SearedFlower>();
 			recipe.AddIngredient(ItemID.HellstoneBar, 50);
 			recipe.AddIngredient(ItemID.Hellforge, 1);
+			recipe.AddIngredient(ItemID.FallenStar, 20);
 			recipe.AddIngredient(ItemID.FragmentNebula, 10);
 			recipe.AddTile(TileID.LunarCraftingStation);
 			recipe.Register();
 		}
 		public override void Update(ref float gravity, ref float maxFallSpeed)
 		{
-			Lighting.AddLight(Item.Center, 0.5f, 0, 0);
+			Lighting.AddLight(Item.Center, 1, 0, 0);
 			maxFallSpeed = 0;
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
@@ -172,6 +173,11 @@ namespace LimeAccessories.Items
 			player.fireWalk = true;
 			player.GetDamage<MagicDamageClass>() += 0.25f;
 			player.GetModPlayer<LimePlayerHooks>().SearedFlowerEquipped = true;
+		}
+		public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
+		{
+			if (incomingItem.netID == ModContent.ItemType<SearedFlower>()) return false;
+			return true;
 		}
 	}
 }
