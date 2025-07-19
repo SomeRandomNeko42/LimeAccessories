@@ -222,6 +222,22 @@ Items: {
 			'''
 		DisplayName: Vampiric Worm Scarf
 	}
+
+	HellsSun: {
+		Tooltip:
+			'''
+			10% reduced mana cost
+			25% increased magic damage
+			Increased mana regeneration in sunlight or hell
+			Your magic attacks burn enemies with cursed flames
+			Automatically use mana potions when needed
+			Grants immunity to fire blocks, Burning and Hellfire
+			Reduces damage from touching lava
+			You glow a faint red light
+			'Hell's Artificial Sun'
+			'''
+		DisplayName: Hell's Sun
+	}
 }
 
 Configs: {

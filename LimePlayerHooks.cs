@@ -9,6 +9,8 @@ namespace LimeAccessories
 	public class LimePlayerHooks : ModPlayer 
 	{
 		public bool SearedFlowerEquipped;
+		public bool HellsSunEquipped;
+
 		public int OmamoriEquipped;
 		public bool AirOmamoriEquipped;
 
@@ -41,15 +43,23 @@ namespace LimeAccessories
 		public override void ResetEffects()
 		{
 			SearedFlowerEquipped = false;
+			HellsSunEquipped = false;
+
+			OmamoriEquipped = 0;
 			AirOmamoriEquipped = false;
+
 			PrisionScrollEquipped = false;
+
 			LeachScarfEquipped = false;
 			VampireScarfEquipped = false;
+			
+		}
+
+		public override void PreUpdate()
+		{
 			if (PrisionScrollActiveness > 0) PrisionScrollActiveness -= 1;
 			if (LeachScarfPunishment > 0) LeachScarfPunishment -= 1;
 			if (VampireScarfPunishment > 0) VampireScarfPunishment -= 1;
-			OmamoriEquipped = 0;
-			base.ResetEffects();
 		}
 		public override void UpdateDead()
 		{
@@ -74,10 +84,14 @@ namespace LimeAccessories
 		}
 		public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
 		{
-			if (proj.DamageType == DamageClass.Magic && SearedFlowerEquipped && !proj.coldDamage)
+			if (proj.DamageType == DamageClass.Magic && HellsSunEquipped || (SearedFlowerEquipped && !proj.coldDamage))
 			{
 				target.AddBuff(BuffID.OnFire, 60);
 				target.AddBuff(BuffID.OnFire3, 60);
+				if (HellsSunEquipped)
+				{
+					target.AddBuff(BuffID.CursedInferno, 90);
+				}
 			}
 			if (proj.DamageType == DamageClass.Summon && AttemptToActivatePrisonScroll())
 			{

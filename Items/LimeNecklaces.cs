@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Config;
 
 namespace LimeAccessories.Items
 {
@@ -38,7 +37,6 @@ namespace LimeAccessories.Items
 		public override void Update(ref float gravity, ref float maxFallSpeed)
 		{
 			Lighting.AddLight(Item.Center, 1, 0, 1);
-			base.Update(ref gravity, ref maxFallSpeed);
 		}
 	}
 	[AutoloadEquip(EquipType.Neck)]
@@ -131,6 +129,49 @@ namespace LimeAccessories.Items
 		{
 			if (incomingItem.type == ItemID.WormScarf || incomingItem.type == ModContent.ItemType<LeachScarf>()) return false;
 			return true;
+		}
+	}
+	[AutoloadEquip(EquipType.Neck)]
+	public class HellsSun : ModItem
+	{
+		public override void SetDefaults()
+		{
+			Item.DefaultToAccessory(24, 24);
+			Item.rare = ItemRarityID.Red;
+			Item.value = Item.sellPrice(0, 30, 0, 0);
+		}
+		public override void AddRecipes()
+		{
+			Recipe recipe = CreateRecipe(1);
+			recipe.AddIngredient<SearedFlower>();
+			recipe.AddIngredient(ItemID.HellstoneBar, 50);
+			recipe.AddIngredient(ItemID.Hellforge, 1);
+			recipe.AddIngredient(ItemID.FragmentNebula, 10);
+			recipe.AddTile(TileID.LunarCraftingStation);
+			recipe.Register();
+		}
+		public override void Update(ref float gravity, ref float maxFallSpeed)
+		{
+			Lighting.AddLight(Item.Center, 0.5f, 0, 0);
+			maxFallSpeed = 0;
+		}
+		public override void UpdateAccessory(Player player, bool hideVisual)
+		{
+			Lighting.AddLight(player.Center, 0.5f, 0, 0);
+
+			if ((!player.behindBackWall && player.position.Y > Main.worldSurface && (Main.dayTime || Main.eclipse))
+				|| player.ZoneUnderworldHeight)
+				player.manaRegen += 6;
+			else if (Main.dayTime || Main.eclipse)
+				player.manaRegen += 2;
+			player.manaFlower = true;
+			player.manaCost -= 0.1f;
+			player.buffImmune[BuffID.OnFire3] = true;
+			player.buffImmune[BuffID.OnFire] = true;
+			player.lavaRose = true;
+			player.fireWalk = true;
+			player.GetDamage<MagicDamageClass>() += 0.25f;
+			player.GetModPlayer<LimePlayerHooks>().SearedFlowerEquipped = true;
 		}
 	}
 }

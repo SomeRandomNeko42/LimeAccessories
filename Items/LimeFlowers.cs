@@ -29,7 +29,6 @@ namespace LimeAccessories.Items
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			player.manaFlower = true;
-			player.aggro -= 400;
 			player.manaCost -= 0.1f;
 			player.buffImmune[BuffID.OnFire3] = true;
 			player.buffImmune[BuffID.OnFire] = true;
