@@ -293,9 +293,9 @@ namespace LimeAccessories.Items
 		public override void AddRecipes()
 		{
 			Recipe recipe = CreateRecipe(1);
-			recipe.AddIngredient(ItemID.WormTooth, 5);
+			recipe.AddIngredient(ItemID.WormTooth, 10);
 			recipe.AddIngredient(ItemID.GlowingMushroom, 40);
-			recipe.AddIngredient(ItemID.Silk, 20);
+			recipe.AddIngredient(ItemID.HealingPotion, 10);
 			recipe.AddIngredient(ItemID.BandofRegeneration, 1);
 			recipe.AddTile(TileID.Loom);
 			recipe.Register();
