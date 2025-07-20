@@ -71,7 +71,8 @@ namespace LimeAccessories
 		}
 		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
-			if ((LeachScarfEquipped || VampireScarfEquipped) && target.canGhostHeal && Player.statLife < Player.statLifeMax2)
+			if ((LeachScarfEquipped || VampireScarfEquipped) && target.canGhostHeal 
+				&& Player.statLife < Player.statLifeMax2 && !Player.dead)
 			{
 				int attemptedHeal = damageDone / 10;
 				if (Player.lifeSteal < attemptedHeal)
