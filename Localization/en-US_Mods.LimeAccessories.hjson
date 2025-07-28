@@ -120,6 +120,7 @@ Items: {
 			Grants a increasing damage modifier inversely based on your health, up to a maximum of +50% damage
 			    No effect until 70% HP or less
 			Grants immunity to fire and limited immunity to lava
+			You may not take more then 90% of your max HP in damage from a single attack
 			'Theres nothing more dangerous then someone whose out of options'
 			'''
 	}
