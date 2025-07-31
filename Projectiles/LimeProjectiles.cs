@@ -38,7 +38,7 @@ namespace LimeAccessories.Projectiles
 			// Lighting
 			Lighting.AddLight(Projectile.Center, 0.4f, 0f, 0f);
 			// Velocity cap
-			float maxVelocity = 8 * (1 - MathF.Pow(MathF.E, -0.15f * Projectile.ai[0]));
+			float maxVelocity = MathF.Min(Projectile.ai[0]/7.5f, 30);
 			if (maxVelocity < 0) maxVelocity = 0;
 
 			// Target isnt valid, drop it
@@ -77,7 +77,6 @@ namespace LimeAccessories.Projectiles
 				Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, 
 					DustID.Clentaminator_Red, Projectile.velocity.X / 4 * 3, Projectile.velocity.Y / 4 * 3);
 				dust.noGravity = true;
-				dust.velocity *= 1.5f;
 				dust.scale *= 0.9f;
 			}
 		}

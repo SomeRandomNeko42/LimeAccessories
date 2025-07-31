@@ -97,7 +97,7 @@ namespace LimeAccessories
 			{
 				for (int i = 0; i < 8; i++)
 				{
-					Vector2 direction = new Vector2(0, 20).RotatedBy(2 * MathF.PI / 8 * i, Vector2.Zero);
+					Vector2 direction = new Vector2(0, 30).RotatedBy(2 * MathF.PI / 8 * i, Vector2.Zero);
 					Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.position + direction, direction / 4,
 						ModContent.ProjectileType<MadnessBullet>(), 50, Player.GetKnockback(DamageClass.Ranged).Base);
 				}
