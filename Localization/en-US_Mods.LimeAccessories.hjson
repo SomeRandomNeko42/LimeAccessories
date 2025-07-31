@@ -239,6 +239,23 @@ Items: {
 			'''
 		DisplayName: Hell's Sun
 	}
+
+	LunaticAmulet: {
+		DisplayName: Lunatic Amulet
+		Tooltip:
+			'''
+			Grants immunity to Confusion, Silence and Cursed
+			Has a chance to create illusions and dodge an attack
+			Temporarily increase critical chance after dodge
+			May confuse nearby enemies after being struck
+			Increases movement speed and acceleration
+			Provides light when worn
+			Getting a critical strike may summon homing bullets to chase nearby targets
+			15% Increased ranged damage
+			5% Increased ranged critical strike chance
+			'It hurts to look directly into, yet it is somehow hard to tear your eyes away'
+			'''
+	}
 }
 
 Configs: {
@@ -270,3 +287,5 @@ Buffs: {
 		Description: Increased summon damage! [c/00ff00:'Take them down for us!']
 	}
 }
+
+Projectiles.MadnessBullet.DisplayName: Madness Bullet

@@ -180,4 +180,41 @@ namespace LimeAccessories.Items
 			return true;
 		}
 	}
+	[AutoloadEquip(EquipType.Neck)]
+	public class LunaticAmulet : ModItem
+	{
+		public override void SetDefaults()
+		{
+			Item.DefaultToAccessory(24, 34);
+			Item.expert = true;
+			Item.value = Item.sellPrice(0, 15, 0, 0);
+		}
+		public override void AddRecipes()
+		{
+			Recipe recipe = CreateRecipe(1);
+			recipe.AddIngredient<HypnotistsPendant>();
+			recipe.AddIngredient(ItemID.Ectoplasm, 20);
+			recipe.AddIngredient(ItemID.FragmentVortex, 10);
+			recipe.AddIngredient(ItemID.RangerEmblem);
+			recipe.AddTile(TileID.DemonAltar);
+			recipe.AddCondition(Condition.InGraveyard);
+			recipe.Register();
+		}
+		public override void UpdateAccessory(Player player, bool hideVisual)
+		{
+			Lighting.AddLight(player.Center, 1, 0, 0);
+			player.hasMagiluminescence = true;
+			player.GetDamage(DamageClass.Ranged) += 0.15f;
+			player.GetCritChance(DamageClass.Ranged) += 5f;
+			player.brainOfConfusionItem = Item;
+			player.buffImmune[BuffID.Confused] = true;
+			player.buffImmune[BuffID.Cursed] = true;
+			player.buffImmune[BuffID.Silenced] = true;
+			player.GetModPlayer<LimePlayerHooks>().LunaticAmuletEquipped = true;
+		}
+		public override void Update(ref float gravity, ref float maxFallSpeed)
+		{
+			Lighting.AddLight(Item.Center, 1, 0, 0);
+		}
+	}
 }
