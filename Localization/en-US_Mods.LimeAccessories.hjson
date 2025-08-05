@@ -256,6 +256,23 @@ Items: {
 			'It hurts to look directly into, yet it is somehow hard to tear your eyes away'
 			'''
 	}
+
+	ManaTank: {
+		Tooltip: Increases maximum mana by 100
+		DisplayName: Mana Tank
+	}
+
+	ManaPack: {
+		Tooltip:
+			'''
+			Increases maximum mana by 200
+			Restores mana when damaged
+			Increases pickup range for mana stars
+			Doubles mana capacity
+			'Probably not a good idea to compress mana this much...'
+			'''
+		DisplayName: Mana Pack
+	}
 }
 
 Configs: {
