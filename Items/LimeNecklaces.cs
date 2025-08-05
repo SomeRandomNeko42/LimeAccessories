@@ -21,6 +21,7 @@ namespace LimeAccessories.Items
 			recipe.AddIngredient(ItemID.Magiluminescence);
 			recipe.AddIngredient(ItemID.BrainOfConfusion);
 			recipe.AddIngredient(ItemID.SoulofNight, 5);
+			recipe.AddIngredient(ItemID.Lens, 100);
 			recipe.AddTile(TileID.DemonAltar);
 			recipe.Register();
 		}
