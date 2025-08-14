@@ -136,11 +136,11 @@ namespace LimeAccessories
 		{
 			if (LeachScarfEquipped || LeachScarfPunishment > 0)
 			{
-				healValue /= 4;
+				healValue /= 8;
 			}
 			if (VampireScarfEquipped || VampireScarfPunishment > 0)
 			{
-				healValue /= 2;
+				healValue /= 4;
 			}
 		}
 		public override void OnHurt(Player.HurtInfo info)
