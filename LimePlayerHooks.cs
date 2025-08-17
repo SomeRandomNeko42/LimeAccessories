@@ -1,4 +1,6 @@
 ﻿using LimeAccessories.Buffs;
+using LimeAccessories.Projectiles;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -21,6 +23,8 @@ namespace LimeAccessories
 
 		public bool PrisionScrollEquipped;
 		public int PrisionScrollActiveness = 0;
+
+		public bool LunaticAmuletEquipped;
 
 		private bool AttemptToActivatePrisonScroll()
 		{
@@ -53,6 +57,7 @@ namespace LimeAccessories
 			LeachScarfEquipped = false;
 			VampireScarfEquipped = false;
 			
+			LunaticAmuletEquipped = false;
 		}
 
 		public override void PreUpdate()
@@ -71,7 +76,8 @@ namespace LimeAccessories
 		}
 		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
-			if ((LeachScarfEquipped || VampireScarfEquipped) && target.canGhostHeal)
+			if ((LeachScarfEquipped || VampireScarfEquipped) && target.canGhostHeal 
+				&& Player.statLife < Player.statLifeMax2 && !Player.dead)
 			{
 				int attemptedHeal = damageDone / 10;
 				if (Player.lifeSteal < attemptedHeal)
@@ -84,6 +90,19 @@ namespace LimeAccessories
 		}
 		public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
 		{
+			// Ranged
+			if (LunaticAmuletEquipped && proj.type != ModContent.ProjectileType<MadnessBullet>() // Dont let it trigger itself
+				&& hit.Crit && Player.ownedProjectileCounts[ModContent.ProjectileType<MadnessBullet>()] < 16
+				&& Main._rand.NextBool() && !Player.dead)
+			{
+				for (int i = 0; i < 8; i++)
+				{
+					Vector2 direction = new Vector2(0, 30).RotatedBy(2 * MathF.PI / 8 * i, Vector2.Zero);
+					Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.position + direction, direction / 4,
+						ModContent.ProjectileType<MadnessBullet>(), 50, Player.GetKnockback(DamageClass.Ranged).Base);
+				}
+			}
+			// Magic
 			if (proj.DamageType == DamageClass.Magic && HellsSunEquipped || (SearedFlowerEquipped && !proj.coldDamage))
 			{
 				target.AddBuff(BuffID.OnFire, 60);
@@ -93,6 +112,7 @@ namespace LimeAccessories
 					target.AddBuff(BuffID.CursedInferno, 90);
 				}
 			}
+			// Summon
 			if (proj.DamageType == DamageClass.Summon && AttemptToActivatePrisonScroll())
 			{
 				switch (Main._rand.Next(4))
@@ -116,11 +136,11 @@ namespace LimeAccessories
 		{
 			if (LeachScarfEquipped || LeachScarfPunishment > 0)
 			{
-				healValue /= 4;
+				healValue /= 8;
 			}
 			if (VampireScarfEquipped || VampireScarfPunishment > 0)
 			{
-				healValue /= 2;
+				healValue /= 4;
 			}
 		}
 		public override void OnHurt(Player.HurtInfo info)

@@ -120,6 +120,7 @@ Items: {
 			Grants a increasing damage modifier inversely based on your health, up to a maximum of +50% damage
 			    No effect until 70% HP or less
 			Grants immunity to fire and limited immunity to lava
+			You may not take more then 90% of your max HP in damage from a single attack
 			'Theres nothing more dangerous then someone whose out of options'
 			'''
 	}
@@ -204,7 +205,7 @@ Items: {
 	LeachScarf: {
 		Tooltip:
 			'''
-			Decreases the amount healing potions heal by 75%, This effect will continue for 30 seconds after unequipped
+			Decreases the amount healing potions heal by 88%, This effect will continue for 30 seconds after unequipped
 			Increases lifesteal by 10%
 			'Sorry, but I've overcome that weakness long ago. Now I love salt!'
 			'Was the flavor the problem?'
@@ -215,7 +216,7 @@ Items: {
 	VampiricWormScarf: {
 		Tooltip:
 			'''
-			Decreases the amount healing potions heal by 50%, This effect will continue for 30 seconds after unequipped
+			Decreases the amount healing potions heal by 75%, This effect will continue for 30 seconds after unequipped
 			Increases lifesteal by 10%
 			Decreases damage taken by 17%
 			'Its worrying to wrap it around your neck, but at the same time, its so soft...'
@@ -237,6 +238,40 @@ Items: {
 			'Hell's Artificial Sun'
 			'''
 		DisplayName: Hell's Sun
+	}
+
+	LunaticAmulet: {
+		DisplayName: Lunatic Amulet
+		Tooltip:
+			'''
+			Grants immunity to Confusion, Silence and Cursed
+			Has a chance to create illusions and dodge an attack
+			Temporarily increase critical chance after dodge
+			May confuse nearby enemies after being struck
+			Increases movement speed and acceleration
+			Provides light when worn
+			Getting a critical strike may summon homing bullets to chase nearby targets
+			15% Increased ranged damage
+			5% Increased ranged critical strike chance
+			'It hurts to look directly into, yet it is somehow hard to tear your eyes away'
+			'''
+	}
+
+	ManaTank: {
+		Tooltip: Increases maximum mana by 100
+		DisplayName: Mana Tank
+	}
+
+	ManaPack: {
+		Tooltip:
+			'''
+			Increases maximum mana by 200
+			Restores mana when damaged
+			Increases pickup range for mana stars
+			Doubles mana capacity
+			'Probably not a good idea to compress mana this much...'
+			'''
+		DisplayName: Mana Pack
 	}
 }
 
@@ -269,3 +304,5 @@ Buffs: {
 		Description: Increased summon damage! [c/00ff00:'Take them down for us!']
 	}
 }
+
+Projectiles.MadnessBullet.DisplayName: Madness Bullet
