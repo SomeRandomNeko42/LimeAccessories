@@ -181,6 +181,18 @@ Items: {
 			'''
 	}
 
+	UnsealedScroll: {
+		DisplayName: Unsealed Scroll
+		Tooltip:
+			'''
+			Increases your max number of minions by 3
+			Increases your max number of sentrys by 1
+			Increases your summon damage by 30% and the knockback of your minions
+			[c/cd89fa:Spirits may come to your aid in combat]
+			'The pact has been made, the spirits will grant you their power'
+			'''
+	}
+
 	MassiveBundleOfObsidianHorseshoeBalloons: {
 		Tooltip:
 			'''
