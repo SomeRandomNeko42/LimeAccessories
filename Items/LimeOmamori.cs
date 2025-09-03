@@ -114,9 +114,9 @@ namespace LimeAccessories.Items
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			player.statDefense += 6;
-			if (player.statLife < player.statLifeMax2 / 4 * 3) { player.statDefense += 2; }
-			if (player.statLife < player.statLifeMax2 / 2) { player.statDefense += 2; }
-			if (player.statLife < player.statLifeMax2 / 4) { player.statDefense += 2; }
+			if (player.statLife < player.statLifeMax2 / 4 * 3) { player.statDefense += 3; }
+			if (player.statLife < player.statLifeMax2 / 2) { player.statDefense += 3; }
+			if (player.statLife < player.statLifeMax2 / 4) { player.statDefense += 3; }
 			player.noKnockback = true;
 			player.GetModPlayer<LimePlayerHooks>().OmamoriEquipped = 50;
 		}
