@@ -85,6 +85,7 @@ namespace LimeAccessories
 					attemptedHeal = (int)Player.lifeSteal;
 				}
 				Player.lifeSteal -= attemptedHeal;
+				if (Main.masterMode) Player.lifeSteal -= attemptedHeal / 2;
 				if (attemptedHeal > 0) Player.Heal(attemptedHeal);
 			}
 		}
@@ -103,7 +104,7 @@ namespace LimeAccessories
 				}
 			}
 			// Magic
-			if (proj.DamageType == DamageClass.Magic && HellsSunEquipped || (SearedFlowerEquipped && !proj.coldDamage))
+			if (proj.DamageType == DamageClass.Magic && (HellsSunEquipped || (SearedFlowerEquipped && !proj.coldDamage)))
 			{
 				target.AddBuff(BuffID.OnFire, 60);
 				target.AddBuff(BuffID.OnFire3, 60);
