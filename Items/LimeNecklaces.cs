@@ -161,10 +161,10 @@ namespace LimeAccessories.Items
 		{
 			Lighting.AddLight(player.Center, 0.5f, 0, 0);
 
-			if ((!player.behindBackWall && player.position.Y > Main.worldSurface && (Main.dayTime || Main.eclipse))
+			if ((!player.behindBackWall && player.position.Y > Main.worldSurface && Main.IsItDay())
 				|| player.ZoneUnderworldHeight)
 				player.manaRegen += 6;
-			else if (Main.dayTime || Main.eclipse)
+			else if (Main.IsItDay())
 				player.manaRegen += 2;
 			player.manaFlower = true;
 			player.manaCost -= 0.1f;
