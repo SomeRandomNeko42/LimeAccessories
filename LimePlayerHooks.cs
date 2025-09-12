@@ -100,7 +100,7 @@ namespace LimeAccessories
 				{
 					Vector2 direction = new Vector2(0, 30).RotatedBy(2 * MathF.PI / 8 * i, Vector2.Zero);
 					Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.position + direction, direction / 4,
-						ModContent.ProjectileType<MadnessBullet>(), 50, Player.GetKnockback(DamageClass.Ranged).Base);
+						ModContent.ProjectileType<MadnessBullet>(), 250, Player.GetKnockback(DamageClass.Ranged).Base);
 				}
 			}
 			// Magic
