@@ -101,6 +101,12 @@ namespace LimeAccessories.Items
 			recipe.AddIngredient(ItemID.SoulofMight, 10);
 			recipe.AddTile(TileID.LihzahrdAltar);
 			recipe.Register();
+			Recipe recipePaladin = CreateRecipe(1);
+			recipePaladin.AddIngredient<AncientOmamori>();
+			recipePaladin.AddIngredient(ItemID.PaladinsShield);
+			recipePaladin.AddIngredient(ItemID.SoulofMight, 10);
+			recipePaladin.AddTile(TileID.LihzahrdAltar);
+			recipePaladin.Register();
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
