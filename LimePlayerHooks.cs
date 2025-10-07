@@ -88,6 +88,12 @@ namespace LimeAccessories
 				if (Main.masterMode) Player.lifeSteal -= attemptedHeal / 2;
 				if (attemptedHeal > 0) Player.Heal(attemptedHeal);
 			}
+			// Punish not using summon weapons with prison scroll
+			if (PrisionScrollEquipped && 
+				!(hit.DamageType == DamageClass.Summon || hit.DamageType == DamageClass.SummonMeleeSpeed || hit.DamageType == DamageClass.MagicSummonHybrid))
+			{
+				PrisionScrollActiveness += 10;
+			}
 		}
 		public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
 		{
