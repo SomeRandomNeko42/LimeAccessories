@@ -27,6 +27,7 @@ namespace LimeAccessories.Items
 			recipe.Register();
 			Recipe recipeAlt = CreateRecipe(1);
 			recipeAlt.AddIngredient(ItemID.MagnetFlower);
+			recipeAlt.AddIngredient(ItemID.PutridScent);
 			recipeAlt.AddIngredient(ItemID.ObsidianRose);
 			recipeAlt.AddIngredient(ItemID.MagmaStone);
 			recipeAlt.AddIngredient(ItemID.SorcererEmblem);
