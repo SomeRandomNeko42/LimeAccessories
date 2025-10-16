@@ -11,7 +11,7 @@ namespace LimeAccessories.Items
 		public override void SetDefaults()
 		{
 			Item.DefaultToAccessory(32, 32);
-			Item.rare = ItemRarityID.Purple;
+			Item.rare = ItemRarityID.Yellow;
 			Item.value = Item.sellPrice(0, 5, 0, 0);
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
@@ -40,9 +40,55 @@ namespace LimeAccessories.Items
 			recipe.AddIngredient(ItemID.SoulofMight, 5);
 			recipe.AddIngredient(ItemID.SoulofSight, 5);
 			recipe.AddIngredient(ItemID.Ectoplasm, 50);
-			recipe.AddCondition(Condition.InGraveyard);
 			recipe.AddTile(TileID.DemonAltar);
 			recipe.Register();
+		}
+		public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
+		{
+			if (incomingItem.type == ModContent.ItemType<UnsealedScroll>()) { return false; }
+			return true;
+		}
+	}
+	public class UnsealedScroll : ModItem
+	{
+		public override void SetDefaults()
+		{
+			Item.DefaultToAccessory(42, 42);
+			Item.rare = ItemRarityID.Purple;
+			Item.value = Item.sellPrice(0, 15, 0, 0);
+		}
+		public override void UpdateAccessory(Player player, bool hideVisual)
+		{
+			player.maxMinions += 3;
+			player.maxTurrets += 1;
+			player.GetDamage<SummonDamageClass>() += 0.3f;
+			player.GetKnockback<SummonDamageClass>() += 0.2f;
+			player.GetModPlayer<LimePlayerHooks>().PrisionScrollEquipped = true;
+		}
+		public override void ModifyTooltips(List<TooltipLine> tooltips)
+		{
+			if (ModContent.GetInstance<LimeClientConfig>().DebugMode)
+			{
+				int index = tooltips.Count - 1;
+				ref string text = ref tooltips[index].Text;
+				text = Main.LocalPlayer.GetModPlayer<LimePlayerHooks>().PrisionScrollActiveness.ToString();
+			}
+		}
+		public override void AddRecipes()
+		{
+			Recipe recipe = CreateRecipe(1);
+			recipe.AddIngredient<PrisonScroll>();
+			recipe.AddIngredient(ItemID.PygmyNecklace);
+			recipe.AddIngredient(ItemID.Ectoplasm, 50);
+			recipe.AddIngredient(ItemID.FragmentStardust, 10);
+			recipe.AddIngredient(ItemID.ApprenticeScarf, 1);
+			recipe.AddTile(TileID.DemonAltar);
+			recipe.Register();
+		}
+		public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
+		{
+			if (incomingItem.type == ModContent.ItemType<PrisonScroll>()) { return false; }
+			return true;
 		}
 	}
 }

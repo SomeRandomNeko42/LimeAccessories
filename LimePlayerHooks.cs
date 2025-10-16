@@ -85,7 +85,14 @@ namespace LimeAccessories
 					attemptedHeal = (int)Player.lifeSteal;
 				}
 				Player.lifeSteal -= attemptedHeal;
+				if (Main.masterMode) Player.lifeSteal -= attemptedHeal / 2;
 				if (attemptedHeal > 0) Player.Heal(attemptedHeal);
+			}
+			// Punish not using summon weapons with prison scroll
+			if (PrisionScrollEquipped && 
+				!(hit.DamageType == DamageClass.Summon || hit.DamageType == DamageClass.SummonMeleeSpeed || hit.DamageType == DamageClass.MagicSummonHybrid))
+			{
+				PrisionScrollActiveness += 10;
 			}
 		}
 		public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
@@ -99,11 +106,11 @@ namespace LimeAccessories
 				{
 					Vector2 direction = new Vector2(0, 30).RotatedBy(2 * MathF.PI / 8 * i, Vector2.Zero);
 					Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.position + direction, direction / 4,
-						ModContent.ProjectileType<MadnessBullet>(), 50, Player.GetKnockback(DamageClass.Ranged).Base);
+						ModContent.ProjectileType<MadnessBullet>(), 250, Player.GetKnockback(DamageClass.Ranged).Base);
 				}
 			}
 			// Magic
-			if (proj.DamageType == DamageClass.Magic && HellsSunEquipped || (SearedFlowerEquipped && !proj.coldDamage))
+			if (proj.DamageType == DamageClass.Magic && (HellsSunEquipped || (SearedFlowerEquipped && !proj.coldDamage)))
 			{
 				target.AddBuff(BuffID.OnFire, 60);
 				target.AddBuff(BuffID.OnFire3, 60);

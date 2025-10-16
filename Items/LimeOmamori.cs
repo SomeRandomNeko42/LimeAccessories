@@ -30,15 +30,6 @@ namespace LimeAccessories.Items
 			}
 			return true;
 		}
-		public override void AddRecipes()
-		{
-			Recipe ToLavaCharm = Recipe.Create(ItemID.LavaCharm, 1);
-			ToLavaCharm.AddIngredient<AncientOmamori>();
-			ToLavaCharm.AddIngredient(ItemID.HellstoneBar, 10);
-			ToLavaCharm.AddIngredient(ItemID.Bone, 20);
-			ToLavaCharm.AddTile(TileID.Hellforge);
-			ToLavaCharm.Register();
-		}
 	}
 	public class FlameOmamori : ModItem
 	{
@@ -65,6 +56,23 @@ namespace LimeAccessories.Items
 			recipeAlt.AddIngredient(ItemID.SoulofFright, 10);
 			recipeAlt.AddTile(TileID.Hellforge);
 			recipeAlt.Register();
+			Recipe crimRecipe = CreateRecipe(1);
+			crimRecipe.AddIngredient<AncientOmamori>();
+			crimRecipe.AddIngredient(ItemID.ObsidianRose);
+			crimRecipe.AddIngredient(ItemID.LavaCharm);
+			crimRecipe.AddIngredient(ItemID.Ichor, 10);
+			crimRecipe.AddIngredient(ItemID.SoulofFright, 10);
+			crimRecipe.AddCondition(Condition.NearShimmer);
+			crimRecipe.AddTile(TileID.Hellforge);
+			crimRecipe.Register();
+			Recipe crimRecipeAlt = CreateRecipe(1);
+			crimRecipeAlt.AddIngredient<AncientOmamori>();
+			crimRecipeAlt.AddIngredient(ItemID.MoltenSkullRose);
+			crimRecipeAlt.AddIngredient(ItemID.Ichor, 10);
+			crimRecipeAlt.AddIngredient(ItemID.SoulofFright, 10);
+			crimRecipeAlt.AddCondition(Condition.NearShimmer);
+			crimRecipeAlt.AddTile(TileID.Hellforge);
+			crimRecipeAlt.Register();
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
@@ -110,13 +118,19 @@ namespace LimeAccessories.Items
 			recipe.AddIngredient(ItemID.SoulofMight, 10);
 			recipe.AddTile(TileID.LihzahrdAltar);
 			recipe.Register();
+			Recipe recipePaladin = CreateRecipe(1);
+			recipePaladin.AddIngredient<AncientOmamori>();
+			recipePaladin.AddIngredient(ItemID.PaladinsShield);
+			recipePaladin.AddIngredient(ItemID.SoulofMight, 10);
+			recipePaladin.AddTile(TileID.LihzahrdAltar);
+			recipePaladin.Register();
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			player.statDefense += 6;
-			if (player.statLife < player.statLifeMax2 / 4 * 3) { player.statDefense += 2; }
-			if (player.statLife < player.statLifeMax2 / 2) { player.statDefense += 2; }
-			if (player.statLife < player.statLifeMax2 / 4) { player.statDefense += 2; }
+			if (player.statLife < player.statLifeMax2 / 4 * 3) { player.statDefense += 3; }
+			if (player.statLife < player.statLifeMax2 / 2) { player.statDefense += 3; }
+			if (player.statLife < player.statLifeMax2 / 4) { player.statDefense += 3; }
 			player.noKnockback = true;
 			player.GetModPlayer<LimePlayerHooks>().OmamoriEquipped = 50;
 		}
@@ -153,6 +167,16 @@ namespace LimeAccessories.Items
 			recipe.AddIngredient(ItemID.SoulofSight, 10);
 			recipe.AddTile(TileID.Solidifier);
 			recipe.Register();
+			Recipe recipeAlt = CreateRecipe(1);
+			recipeAlt.AddIngredient<AncientOmamori>();
+			recipeAlt.AddIngredient(ItemID.CharmofMyths);
+			recipeAlt.AddIngredient(ItemID.PanicNecklace);
+			recipeAlt.AddIngredient(ItemID.CrossNecklace);
+			recipeAlt.AddIngredient(ItemID.CursedFlame, 100);
+			recipeAlt.AddIngredient(ItemID.SoulofSight, 10);
+			recipeAlt.AddTile(TileID.Solidifier);
+			recipeAlt.AddCondition(Condition.NearShimmer);
+			recipeAlt.Register();
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{

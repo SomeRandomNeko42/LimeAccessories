@@ -105,7 +105,7 @@ Items: {
 			'''
 			Only one elemental charm can be equipped at a time
 			6 defense
-			For each 25% of your health missing, gain 2 additional defense, up to a total of 12 from this item
+			For each 25% of your health missing, gain 3 additional defense, up to a total of 15 from this item
 			You may not take more then 50% of your max HP in damage from a single attack
 			Grants immunity to knockback
 			'The stone knows not the mountains permanence'
@@ -178,6 +178,18 @@ Items: {
 			[c/cd89fa:Spirits may come to your aid in combat]
 			'You can hear voices whispering from the scroll, seems like they want revenge...'
 			'Long ago, scrolls like these were used to seal away powerful beings, near indestructible from the inside, but so fragile on the outside'
+			'''
+	}
+
+	UnsealedScroll: {
+		DisplayName: Unsealed Scroll
+		Tooltip:
+			'''
+			Increases your max number of minions by 3
+			Increases your max number of sentrys by 1
+			Increases your summon damage by 30% and the knockback of your minions
+			[c/cd89fa:Spirits may come to your aid in combat]
+			'The pact has been made, the spirits will grant you their power'
 			'''
 	}
 
@@ -301,7 +313,7 @@ Buffs: {
 
 	SpiritStrike: {
 		DisplayName: Spirit Strike
-		Description: Increased summon damage! [c/00ff00:'Take them down for us!']
+		Description: 25% Increased summon damage! [c/00ff00:'Take them down for us!']
 	}
 }
 

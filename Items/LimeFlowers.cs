@@ -25,6 +25,15 @@ namespace LimeAccessories.Items
 			recipe.AddIngredient(ItemID.CursedFlame, 10);
 			recipe.AddTile(TileID.TinkerersWorkbench);
 			recipe.Register();
+			Recipe recipeAlt = CreateRecipe(1);
+			recipeAlt.AddIngredient(ItemID.ArcaneFlower);
+			recipeAlt.AddIngredient(ItemID.ObsidianRose);
+			recipeAlt.AddIngredient(ItemID.MagmaStone);
+			recipeAlt.AddIngredient(ItemID.SorcererEmblem);
+			recipeAlt.AddIngredient(ItemID.Ichor, 10);
+			recipeAlt.AddTile(TileID.TinkerersWorkbench);
+			recipeAlt.AddCondition(Condition.NearShimmer);
+			recipeAlt.Register();
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
