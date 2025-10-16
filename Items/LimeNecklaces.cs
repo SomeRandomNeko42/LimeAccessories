@@ -21,9 +21,17 @@ namespace LimeAccessories.Items
 			recipe.AddIngredient(ItemID.Magiluminescence);
 			recipe.AddIngredient(ItemID.BrainOfConfusion);
 			recipe.AddIngredient(ItemID.SoulofNight, 5);
-			recipe.AddIngredient(ItemID.Lens, 100);
+			recipe.AddIngredient(ItemID.Lens, 40);
 			recipe.AddTile(TileID.DemonAltar);
 			recipe.Register();
+			Recipe recipeAlt = CreateRecipe(1);
+			recipeAlt.AddIngredient(ItemID.Magiluminescence);
+			recipeAlt.AddIngredient(ItemID.BrainOfConfusion);
+			recipeAlt.AddIngredient(ItemID.SoulofNight, 5);
+			recipeAlt.AddIngredient(ItemID.Lens, 5);
+			recipeAlt.AddIngredient(ItemID.BlackLens, 1);
+			recipeAlt.AddTile(TileID.DemonAltar);
+			recipeAlt.Register();
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
@@ -93,6 +101,14 @@ namespace LimeAccessories.Items
 			recipe.AddIngredient(ItemID.BandofRegeneration, 1);
 			recipe.AddTile(TileID.Loom);
 			recipe.Register();
+			Recipe recipeAlt = CreateRecipe(1);
+			recipeAlt.AddIngredient(ItemID.Vertebrae, 10);
+			recipeAlt.AddIngredient(ItemID.GlowingMushroom, 40);
+			recipeAlt.AddIngredient(ItemID.HealingPotion, 10);
+			recipeAlt.AddIngredient(ItemID.BandofRegeneration, 1);
+			recipeAlt.AddTile(TileID.Loom);
+			recipeAlt.AddCondition(Condition.NearShimmer);
+			recipeAlt.Register();
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
@@ -145,7 +161,7 @@ namespace LimeAccessories.Items
 		{
 			Recipe recipe = CreateRecipe(1);
 			recipe.AddIngredient<SearedFlower>();
-			recipe.AddIngredient(ItemID.HellstoneBar, 50);
+			recipe.AddIngredient(ItemID.HellstoneBar, 25);
 			recipe.AddIngredient(ItemID.Hellforge, 1);
 			recipe.AddIngredient(ItemID.FallenStar, 20);
 			recipe.AddIngredient(ItemID.FragmentNebula, 10);
@@ -198,7 +214,6 @@ namespace LimeAccessories.Items
 			recipe.AddIngredient(ItemID.FragmentVortex, 10);
 			recipe.AddIngredient(ItemID.RangerEmblem);
 			recipe.AddTile(TileID.DemonAltar);
-			recipe.AddCondition(Condition.InGraveyard);
 			recipe.Register();
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)

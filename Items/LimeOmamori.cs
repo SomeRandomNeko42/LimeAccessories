@@ -56,6 +56,23 @@ namespace LimeAccessories.Items
 			recipeAlt.AddIngredient(ItemID.SoulofFright, 10);
 			recipeAlt.AddTile(TileID.Hellforge);
 			recipeAlt.Register();
+			Recipe crimRecipe = CreateRecipe(1);
+			crimRecipe.AddIngredient<AncientOmamori>();
+			crimRecipe.AddIngredient(ItemID.ObsidianRose);
+			crimRecipe.AddIngredient(ItemID.LavaCharm);
+			crimRecipe.AddIngredient(ItemID.Ichor, 10);
+			crimRecipe.AddIngredient(ItemID.SoulofFright, 10);
+			crimRecipe.AddCondition(Condition.NearShimmer);
+			crimRecipe.AddTile(TileID.Hellforge);
+			crimRecipe.Register();
+			Recipe crimRecipeAlt = CreateRecipe(1);
+			crimRecipeAlt.AddIngredient<AncientOmamori>();
+			crimRecipeAlt.AddIngredient(ItemID.MoltenSkullRose);
+			crimRecipeAlt.AddIngredient(ItemID.Ichor, 10);
+			crimRecipeAlt.AddIngredient(ItemID.SoulofFright, 10);
+			crimRecipeAlt.AddCondition(Condition.NearShimmer);
+			crimRecipeAlt.AddTile(TileID.Hellforge);
+			crimRecipeAlt.Register();
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
@@ -150,6 +167,16 @@ namespace LimeAccessories.Items
 			recipe.AddIngredient(ItemID.SoulofSight, 10);
 			recipe.AddTile(TileID.Solidifier);
 			recipe.Register();
+			Recipe recipeAlt = CreateRecipe(1);
+			recipeAlt.AddIngredient<AncientOmamori>();
+			recipeAlt.AddIngredient(ItemID.CharmofMyths);
+			recipeAlt.AddIngredient(ItemID.PanicNecklace);
+			recipeAlt.AddIngredient(ItemID.CrossNecklace);
+			recipeAlt.AddIngredient(ItemID.CursedFlame, 100);
+			recipeAlt.AddIngredient(ItemID.SoulofSight, 10);
+			recipeAlt.AddTile(TileID.Solidifier);
+			recipeAlt.AddCondition(Condition.NearShimmer);
+			recipeAlt.Register();
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
