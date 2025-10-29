@@ -189,7 +189,7 @@ namespace LimeAccessories.Items
 			player.lavaRose = true;
 			player.fireWalk = true;
 			player.GetDamage<MagicDamageClass>() += 0.25f;
-			player.GetModPlayer<LimePlayerHooks>().SearedFlowerEquipped = true;
+			player.GetModPlayer<LimePlayerHooks>().HellsSunEquipped = true;
 		}
 		public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
 		{
