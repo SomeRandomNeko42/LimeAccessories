@@ -146,6 +146,7 @@ Items: {
 			Increases maximum life by 100
 			Increased invincibility frames and movement speed after taking damage
 			You may not take more then 80% of your max HP in damage from a single attack
+			Grants immunity to Bleeding and Moon Bite
 			'Nothing can't be fixed'
 			'''
 	}
