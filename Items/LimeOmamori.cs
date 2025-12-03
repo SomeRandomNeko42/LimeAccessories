@@ -188,6 +188,8 @@ namespace LimeAccessories.Items
 			player.longInvince = true;
 			player.statLifeMax2 += 100;
 			player.GetModPlayer<LimePlayerHooks>().OmamoriEquipped = 80;
+			player.buffImmune[BuffID.MoonLeech] = true;
+			player.buffImmune[BuffID.Bleeding] = true;
 		}
 		public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
 		{
