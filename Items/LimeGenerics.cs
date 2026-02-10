@@ -1,4 +1,5 @@
 ﻿using LimeAccessories.Common.Config;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -19,7 +20,7 @@ namespace LimeAccessories.Items
 			player.maxMinions += 2;
 			player.GetDamage<SummonDamageClass>() += 0.2f;
 			player.GetKnockback<SummonDamageClass>() += 0.2f;
-			player.GetModPlayer<LimePlayerHooks>().PrisionScrollEquipped = true;
+			player.GetModPlayer<LimePlayerHooks>().PrisonScrollEquipped = true;
 		}
 		public override void ModifyTooltips(List<TooltipLine> tooltips)
 		{
@@ -27,7 +28,7 @@ namespace LimeAccessories.Items
 			{
 				int index = tooltips.Count - 1;
 				ref string text = ref tooltips[index].Text;
-				text = Main.LocalPlayer.GetModPlayer<LimePlayerHooks>().PrisionScrollActiveness.ToString();
+				text = Main.LocalPlayer.GetModPlayer<LimePlayerHooks>().PrisonScrollActiveness.ToString();
 			}
 		}
 		public override void AddRecipes()
@@ -63,7 +64,7 @@ namespace LimeAccessories.Items
 			player.maxTurrets += 1;
 			player.GetDamage<SummonDamageClass>() += 0.3f;
 			player.GetKnockback<SummonDamageClass>() += 0.2f;
-			player.GetModPlayer<LimePlayerHooks>().PrisionScrollEquipped = true;
+			player.GetModPlayer<LimePlayerHooks>().PrisonScrollEquipped = true;
 		}
 		public override void ModifyTooltips(List<TooltipLine> tooltips)
 		{
@@ -71,7 +72,7 @@ namespace LimeAccessories.Items
 			{
 				int index = tooltips.Count - 1;
 				ref string text = ref tooltips[index].Text;
-				text = Main.LocalPlayer.GetModPlayer<LimePlayerHooks>().PrisionScrollActiveness.ToString();
+				text = Main.LocalPlayer.GetModPlayer<LimePlayerHooks>().PrisonScrollActiveness.ToString();
 			}
 		}
 		public override void AddRecipes()
@@ -89,6 +90,28 @@ namespace LimeAccessories.Items
 		{
 			if (incomingItem.type == ModContent.ItemType<PrisonScroll>()) { return false; }
 			return true;
+		}
+	}
+
+	public class ForgottenEarring : ModItem
+	{
+		public override void SetDefaults()
+		{
+			Item.DefaultToAccessory(28, 36);
+			Item.rare = ItemRarityID.LightRed;
+			Item.value = Item.sellPrice(0, 5, 0, 0);
+		}
+
+		public override void UpdateAccessory(Player player, bool hideVisual)
+		{
+			player.GetModPlayer<LimePlayerHooks>().ForgottenEarringEquipped = true;
+		}
+
+		public override void ModifyTooltips(List<TooltipLine> tooltips)
+		{
+			int index = tooltips.Count - 2;
+			ref string text = ref tooltips[index].Text;
+			text = tooltips[index].Text.Replace("0", MathF.Round(Main.LocalPlayer.GetModPlayer<LimePlayerHooks>().ForgottenEarringCharge, 1).ToString());
 		}
 	}
 }

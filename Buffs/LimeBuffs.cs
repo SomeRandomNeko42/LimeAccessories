@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -28,6 +29,36 @@ namespace LimeAccessories.Buffs
 		public override void Update(Player player, ref int buffIndex)
 		{
 			player.GetDamage<SummonDamageClass>() += 0.25f;
+		}
+	}
+
+	// Used by forgotten earring to stun the player and make them immune for a short time
+	public class Staggered : ModBuff
+	{
+		public override void Update(Player player, ref int buffIndex)
+		{
+			player.cursed = true;
+			player.immune = true;
+			player.GetDamage<GenericDamageClass>() -= 1f;
+			player.moveSpeed = 0.1f;
+			player.maxFallSpeed = 0.1f;
+			player.blind = true;
+			player.blockExtraJumps = true;
+			player.GetModPlayer<LimePlayerHooks>().LastStandStaggered = true;
+		}
+		public override bool RightClick(int buffIndex)
+		{
+			return false;
+		}
+	}
+	public class LastStand : ModBuff
+	{
+		public override void Update(Player player, ref int buffIndex)
+		{
+			player.GetDamage<MeleeDamageClass>() += 0.20f;
+			player.GetDamage<GenericDamageClass>() += 0.05f;
+			player.statDefense += 10;
+			player.GetModPlayer<LimePlayerHooks>().ForgottenEarringCharge = 0;
 		}
 	}
 }

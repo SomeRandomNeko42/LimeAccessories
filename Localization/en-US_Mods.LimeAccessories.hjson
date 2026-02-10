@@ -286,6 +286,18 @@ Items: {
 			'''
 		DisplayName: Mana Pack
 	}
+
+	ForgottenEarring: {
+		DisplayName: Forgotten Ear-ring
+		Tooltip:
+			'''
+			When taking lethal damage, you will be stunned momentarilly before entering your last stand, resurging back to 50% health.
+			Takes a bit for this to charge up, using melee weapons causes it to charge faster.
+			Loses all charge when unequipped.
+			Current Charge: 0%
+			'Ear-ring as in its a ring you put around your ear. Doesn't seem intended for human use'
+			'''
+	}
 }
 
 Configs: {
@@ -315,6 +327,16 @@ Buffs: {
 	SpiritStrike: {
 		DisplayName: Spirit Strike
 		Description: 25% Increased summon damage! [c/00ff00:'Take them down for us!']
+	}
+
+	LastStand: {
+		DisplayName: Last Stand
+		Description: You're no match for them, but you have to win!
+	}
+
+	Staggered: {
+		DisplayName: Staggered
+		Description: Its the end.
 	}
 }
 
