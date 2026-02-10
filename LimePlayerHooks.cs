@@ -28,6 +28,7 @@ namespace LimeAccessories
 		public bool LunaticAmuletEquipped;
 
 		public bool ForgottenEarringEquipped;
+		public int ForgottenEarringGracePeriod = 0;
 		public float ForgottenEarringCharge;
 		public bool LastStandStaggered;
 		public bool WasLSSLastTick;
@@ -88,10 +89,11 @@ namespace LimeAccessories
 			else if (!ForgottenEarringEquipped) ForgottenEarringCharge = 0;
 
 			if (CombatTimer > 0) CombatTimer -= 1;
+			if (ForgottenEarringEquipped) ForgottenEarringGracePeriod = 0;
 		}
 		public override void PostUpdate()
 		{
-			if (WasLSSLastTick && !LastStandStaggered)
+			if (WasLSSLastTick && !LastStandStaggered && ForgottenEarringEquipped)
 			{ // Staggered has ended
 				Player.Heal(Player.statLifeMax2 / 2);
 				Player.AddBuff(ModContent.BuffType<LastStand>(), 1200);
@@ -217,10 +219,18 @@ namespace LimeAccessories
 		}
 		public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genDust, ref PlayerDeathReason damageSource)
 		{
+			if ((WasLSSLastTick || LastStandStaggered) && (ForgottenEarringGracePeriod < 5 || ForgottenEarringEquipped))
+			{
+				playSound = false;
+				genDust = false;
+				Player.statLife = 5;
+				return false;
+			}
 			if (ForgottenEarringCharge >= 100 && ForgottenEarringEquipped)
 			{
 				ForgottenEarringCharge = 0;
 				Player.AddBuff(ModContent.BuffType<Staggered>(), 120);
+				Player.statLife = 5;
 				return false;
 			} else
 			{
