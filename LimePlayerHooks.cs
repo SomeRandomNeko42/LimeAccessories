@@ -28,7 +28,7 @@ namespace LimeAccessories
 		public bool LunaticAmuletEquipped;
 
 		public bool ForgottenEarringEquipped;
-		public int ForgottenEarringGracePeriod = 0;
+		public int ForgottenEarringGracePeriod = 0; // The game will attempt to kill you when joining the game, this stops that
 		public float ForgottenEarringCharge;
 		public bool LastStandStaggered;
 		public bool WasLSSLastTick;
@@ -97,7 +97,6 @@ namespace LimeAccessories
 			{ // Staggered has ended
 				Player.Heal(Player.statLifeMax2 / 2);
 				Player.AddBuff(ModContent.BuffType<LastStand>(), 1200);
-				Player.AddImmuneTime(ImmunityCooldownID.General, 10);
 			}
 		}
 		public override void UpdateDead()

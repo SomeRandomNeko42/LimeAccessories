@@ -292,9 +292,9 @@ Items: {
 		Tooltip:
 			'''
 			When taking lethal damage, you will be stunned momentarilly before entering your [c/00ffff:last stand].
-				Entering your last stand resurges you back to 50% health and temporarally grants a 25% boost to melee damage.
+				Entering your last stand resurges you back to 50% health and temporarily grants a 25% boost to melee damage.
 			Takes a bit for this to charge up, using melee weapons causes it to charge faster.
-			You cannot gain charge while in your last stand, and your last stand will be ended early if this is unequipped.
+			You cannot gain charge while in your last stand, and your last stand will be violently ended early if this is unequipped.
 			Loses all charge when unequipped.
 			Current Charge: 0%
 			'Ear-ring as in its a ring you put around your ear. Doesn't seem intended for human use'
