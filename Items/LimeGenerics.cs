@@ -1,4 +1,5 @@
-﻿using LimeAccessories.Common.Config;
+﻿using LimeAccessories.Buffs;
+using LimeAccessories.Common.Config;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -112,6 +113,11 @@ namespace LimeAccessories.Items
 			int index = tooltips.Count - 2;
 			ref string text = ref tooltips[index].Text;
 			text = tooltips[index].Text.Replace("0", MathF.Round(Main.LocalPlayer.GetModPlayer<LimePlayerHooks>().ForgottenEarringCharge, 1).ToString());
+			index = tooltips.Count - 3;
+			if (!(Main.LocalPlayer.HasBuff<Staggered>() || Main.LocalPlayer.HasBuff<LastStand>()))
+			{
+				tooltips[index].Hide();
+			}
 		}
 	}
 }

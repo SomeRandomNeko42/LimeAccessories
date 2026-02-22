@@ -1,8 +1,10 @@
 ﻿using LimeAccessories.Buffs;
 using LimeAccessories.Projectiles;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -32,6 +34,8 @@ namespace LimeAccessories
 		public float ForgottenEarringCharge;
 		public bool LastStandStaggered;
 		public bool WasLSSLastTick;
+		public SoundStyle PlayerDeathSound = new("LimeAccessories/Sounds/playerdead");
+		public SoundStyle PlayerExtendSound = new("LimeAccessories/Sounds/extend");
 
 		public int CombatTimer;
 		public bool UsingMeleeWeapon;
@@ -95,6 +99,7 @@ namespace LimeAccessories
 		{
 			if (WasLSSLastTick && !LastStandStaggered && ForgottenEarringEquipped)
 			{ // Staggered has ended
+				SoundEngine.PlaySound(PlayerExtendSound, Player.position);
 				Player.Heal(Player.statLifeMax2 / 2);
 				Player.AddBuff(ModContent.BuffType<LastStand>(), 1200);
 			}
@@ -110,6 +115,7 @@ namespace LimeAccessories
 		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 			CombatTimer = 60;
+			// Lifesteal with Vampire scarf or Leach scarf
 			if ((LeachScarfEquipped || VampireScarfEquipped) && target.canGhostHeal 
 				&& Player.statLife < Player.statLifeMax2 && !Player.dead)
 			{
@@ -218,6 +224,7 @@ namespace LimeAccessories
 		}
 		public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genDust, ref PlayerDeathReason damageSource)
 		{
+			// Immune to death due to stagger
 			if ((WasLSSLastTick || LastStandStaggered) && (ForgottenEarringGracePeriod < 5 || ForgottenEarringEquipped))
 			{
 				playSound = false;
@@ -225,8 +232,10 @@ namespace LimeAccessories
 				Player.statLife = 5;
 				return false;
 			}
+			// Interupt death due to forgotten earring
 			if (ForgottenEarringCharge >= 100 && ForgottenEarringEquipped)
 			{
+				SoundEngine.PlaySound(PlayerDeathSound);
 				ForgottenEarringCharge = 0;
 				Player.AddBuff(ModContent.BuffType<Staggered>(), 120);
 				Player.statLife = 5;

@@ -67,7 +67,7 @@ namespace LimeAccessories.Buffs
 			{
 				player.DelBuff(buffIndex);
 				// Its impossible to add custom messages as the game will refuse to load it into localization
-				player.Hurt(Terraria.DataStructures.PlayerDeathReason.LegacyDefault(), player.statLifeMax / 2, 0, dodgeable: false, armorPenetration: 100);
+				player.Hurt(Terraria.DataStructures.PlayerDeathReason.LegacyDefault(), player.statLifeMax / 2, 0, dodgeable: false, armorPenetration: 1000);
 				buffIndex -= 1;
 				return;
 			}
@@ -75,6 +75,10 @@ namespace LimeAccessories.Buffs
 			player.GetDamage<GenericDamageClass>() += 0.05f;
 			player.statDefense += 10;
 			player.GetModPlayer<LimePlayerHooks>().ForgottenEarringCharge = 0;
+		}
+		public override bool RightClick(int buffIndex)
+		{
+			return false;
 		}
 	}
 }
