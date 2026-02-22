@@ -296,7 +296,7 @@ Items: {
 			Takes a bit for this to charge up, using melee weapons causes it to charge faster.
 			You cannot gain charge while in your last stand, and your last stand will be violently ended early if this is unequipped.
 			Loses all charge when unequipped.
-			[c/ff0000: WARNING: THIS ITEM IS CURRENTLY FEEDING YOU ENERGY, YOU WILL TAKE EXTREME DAMAGE IF YOU UNEQUIP IT NOW]
+			[c/ff0000:WARNING: THIS ITEM IS CURRENTLY FEEDING YOU ENERGY, YOU WILL TAKE EXTREME DAMAGE IF YOU UNEQUIP IT NOW]
 			Current Charge: 0%
 			'Ear-ring as in its a ring you put around your ear. Doesn't seem intended for human use'
 			'''

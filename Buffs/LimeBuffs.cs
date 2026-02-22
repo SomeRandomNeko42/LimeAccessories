@@ -67,7 +67,7 @@ namespace LimeAccessories.Buffs
 			{
 				player.DelBuff(buffIndex);
 				// Its impossible to add custom messages as the game will refuse to load it into localization
-				player.Hurt(Terraria.DataStructures.PlayerDeathReason.LegacyDefault(), player.statLifeMax / 2, 0, dodgeable: false, armorPenetration: 1000);
+				player.Hurt(Terraria.DataStructures.PlayerDeathReason.LegacyDefault(), (player.statLifeMax / 4) * 3, 0, dodgeable: false, armorPenetration: 1000);
 				buffIndex -= 1;
 				return;
 			}
