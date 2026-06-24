@@ -1,6 +1,8 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.DataStructures;
+using Terraria.Localization;
 
 namespace LimeAccessories.Buffs
 {
@@ -39,9 +41,15 @@ namespace LimeAccessories.Buffs
 			if (player.GetModPlayer<LimePlayerHooks>().ForgottenEarringGracePeriod > 5)
 			{
 				player.DelBuff(buffIndex);
-				// Its impossible to add custom messages as the game will refuse to load it into localization
-				player.KillMe(Terraria.DataStructures.PlayerDeathReason.LegacyDefault(), player.statLifeMax, 0);
-				buffIndex -= 1;
+
+				// Setup the death messages
+				int deathMessage = Main.rand.Next(5);
+				string key = "Mods.LimeAccessories.DeathMessages.RemovedEarRing_" + deathMessage.ToString();
+				NetworkText subject = NetworkText.FromLiteral(player.name);
+
+				PlayerDeathReason RemovedEarRingReason = PlayerDeathReason.ByCustomReason(NetworkText.FromKey(key, subject));
+
+				player.KillMe(RemovedEarRingReason, player.statLifeMax2, 0);
 				return;
 			}
 			player.cursed = true;
@@ -66,9 +74,15 @@ namespace LimeAccessories.Buffs
 			if (player.GetModPlayer<LimePlayerHooks>().ForgottenEarringGracePeriod > 5)
 			{
 				player.DelBuff(buffIndex);
-				// Its impossible to add custom messages as the game will refuse to load it into localization
-				player.Hurt(Terraria.DataStructures.PlayerDeathReason.LegacyDefault(), (player.statLifeMax / 4) * 3, 0, dodgeable: false, armorPenetration: 1000);
-				buffIndex -= 1;
+
+				// Setup the death messages
+				int deathMessage = Main.rand.Next(5);
+				string key = "Mods.LimeAccessories.DeathMessages.RemovedEarRing_" + deathMessage.ToString();
+				NetworkText subject = NetworkText.FromLiteral(player.name);
+
+				PlayerDeathReason RemovedEarRingReason = PlayerDeathReason.ByCustomReason(NetworkText.FromKey(key, subject));
+
+				player.Hurt(RemovedEarRingReason, (player.statLifeMax2 / 4) * 3, 0, dodgeable: false, armorPenetration: 1000, knockback: 0);
 				return;
 			}
 			player.GetDamage<MeleeDamageClass>() += 0.20f;

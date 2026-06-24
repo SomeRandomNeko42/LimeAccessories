@@ -100,7 +100,7 @@ namespace LimeAccessories.Items
 		{
 			Item.DefaultToAccessory(28, 36);
 			Item.rare = ItemRarityID.LightRed;
-			Item.value = Item.sellPrice(0, 5, 0, 0);
+			Item.value = Item.sellPrice(1, 0, 0, 0);
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
@@ -118,6 +118,18 @@ namespace LimeAccessories.Items
 			{
 				tooltips[index].Hide();
 			}
+		}
+
+		public override void AddRecipes()
+		{
+			Recipe recipe = CreateRecipe(1);
+			recipe.AddCondition(Condition.InGraveyard);
+			recipe.AddIngredient<Fetters>();
+			recipe.AddIngredient(ItemID.DestroyerEmblem, 1);
+			recipe.AddIngredient(ItemID.HallowedBar, 5);
+			recipe.AddIngredient(ItemID.ManaCrystal, 2);
+			recipe.AddTile(TileID.MythrilAnvil);
+			recipe.Register();
 		}
 	}
 }

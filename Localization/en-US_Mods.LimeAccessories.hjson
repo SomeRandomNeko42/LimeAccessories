@@ -79,7 +79,6 @@ Items: {
 			Enemies are less likely to target you
 			Grants immunity to fire blocks, Burning and Hellfire
 			Reduces damage from touching lava
-			'I just want it all to [c/ff0000:Burn]'
 			'''
 		DisplayName: Seared Flower
 	}
@@ -303,6 +302,14 @@ Items: {
 	}
 }
 
+DeathMessages: {
+	RemovedEarRing_0: "{0} decided to unequip the item currently keeping them alive."
+	RemovedEarRing_1: "{0} successfully stopped the magic trying to heal them."
+	RemovedEarRing_2: "{0} was revived but killed themselves again to see what death was like."
+	RemovedEarRing_3: '''{0} pressed the button labeled "Die".'''
+	RemovedEarRing_4: "{0} was too distracted by their fashion choices in order to fight."
+}
+
 Configs: {
 	LimeClientConfig: {
 		DisplayName: Client Config
@@ -334,7 +341,12 @@ Buffs: {
 
 	LastStand: {
 		DisplayName: Last Stand
-		Description: You're no match for them, but you have to win!
+		Description:
+			'''
+				They haven't seen the last of you. They're gonna wish they had.
+				20% increased melee damage, 5% increased damage, +10 defense.
+				Unequipping the Forgotten Ear-Ring while this effect is active will deal extreme damage to you.
+			'''
 	}
 
 	Staggered: {

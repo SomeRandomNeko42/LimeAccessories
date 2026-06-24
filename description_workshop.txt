@@ -1,4 +1,5 @@
 Adds new accessories that I feel like adding.
+But is mainly a way for me to learn TModloader.
 
 Sound effects are not mine, they're from touhou! Other then that, everything in this is created by me and without AI.
 
