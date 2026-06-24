@@ -79,7 +79,6 @@ Items: {
 			Enemies are less likely to target you
 			Grants immunity to fire blocks, Burning and Hellfire
 			Reduces damage from touching lava
-			'I just want it all to [c/ff0000:Burn]'
 			'''
 		DisplayName: Seared Flower
 	}
@@ -286,6 +285,29 @@ Items: {
 			'''
 		DisplayName: Mana Pack
 	}
+
+	ForgottenEarring: {
+		DisplayName: Forgotten Ear-ring
+		Tooltip:
+			'''
+			When taking lethal damage, you will be stunned momentarilly before entering your [c/00ffff:last stand].
+				Entering your last stand resurges you back to 50% health and temporarily grants a 25% boost to melee damage.
+			Takes a bit for this to charge up, using melee weapons causes it to charge faster.
+			You cannot gain charge while in your last stand, and your last stand will be violently ended early if this is unequipped.
+			Loses all charge when unequipped.
+			[c/ff0000:WARNING: THIS ITEM IS CURRENTLY FEEDING YOU ENERGY, YOU WILL TAKE EXTREME DAMAGE IF YOU UNEQUIP IT NOW]
+			Current Charge: 0%
+			'Ear-ring as in its a ring you put around your ear. Doesn't seem intended for human use'
+			'''
+	}
+}
+
+DeathMessages: {
+	RemovedEarRing_0: "{0} decided to unequip the item currently keeping them alive."
+	RemovedEarRing_1: "{0} successfully stopped the magic trying to heal them."
+	RemovedEarRing_2: "{0} was revived but killed themselves again to see what death was like."
+	RemovedEarRing_3: '''{0} pressed the button labeled "Die".'''
+	RemovedEarRing_4: "{0} was too distracted by their fashion choices in order to fight."
 }
 
 Configs: {
@@ -315,6 +337,21 @@ Buffs: {
 	SpiritStrike: {
 		DisplayName: Spirit Strike
 		Description: 25% Increased summon damage! [c/00ff00:'Take them down for us!']
+	}
+
+	LastStand: {
+		DisplayName: Last Stand
+		Description:
+			'''
+				They haven't seen the last of you. They're gonna wish they had.
+				20% increased melee damage, 5% increased damage, +10 defense.
+				Unequipping the Forgotten Ear-Ring while this effect is active will deal extreme damage to you.
+			'''
+	}
+
+	Staggered: {
+		DisplayName: Staggered
+		Description: Its the end...?
 	}
 }
 

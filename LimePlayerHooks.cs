@@ -1,8 +1,11 @@
 ﻿using LimeAccessories.Buffs;
 using LimeAccessories.Projectiles;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -21,21 +24,32 @@ namespace LimeAccessories
 		public int LeachScarfPunishment;
 		public int VampireScarfPunishment;
 
-		public bool PrisionScrollEquipped;
-		public int PrisionScrollActiveness = 0;
+		public bool PrisonScrollEquipped;
+		public int PrisonScrollActiveness = 0;
 
 		public bool LunaticAmuletEquipped;
 
+		public bool ForgottenEarringEquipped;
+		public int ForgottenEarringGracePeriod = 0; // The game will attempt to kill you when joining the game, this stops that
+		public float ForgottenEarringCharge;
+		public bool LastStandStaggered;
+		public bool WasLSSLastTick;
+		public SoundStyle PlayerDeathSound = new("LimeAccessories/Sounds/playerdead");
+		public SoundStyle PlayerExtendSound = new("LimeAccessories/Sounds/extend");
+
+		public int CombatTimer;
+		public bool UsingMeleeWeapon;
+
 		private bool AttemptToActivatePrisonScroll()
 		{
-			if (!PrisionScrollEquipped) { return false; }
+			if (!PrisonScrollEquipped) { return false; }
 			// https://www.desmos.com/calculator/ilj8wbwbie, where X is activeness and H is HP percent + 10
 			float HPPercent = MathF.Round(Player.statLife / Player.statLifeMax2 * 100) + 10;
-			int Roll = (int)MathF.Round(100 - MathF.Pow((HPPercent * PrisionScrollActiveness), 0.5f));
+			int Roll = (int)MathF.Round(100 - MathF.Pow((HPPercent * PrisonScrollActiveness), 0.5f));
 			if (Main._rand.Next(0,100) < Roll)
 			{
-				PrisionScrollActiveness += 240;
-				if (Main.masterMode) PrisionScrollActiveness += 120;
+				PrisonScrollActiveness += 240;
+				if (Main.masterMode) PrisonScrollActiveness += 120;
 				return true;
 			}
 			else
@@ -52,23 +66,47 @@ namespace LimeAccessories
 			OmamoriEquipped = 0;
 			AirOmamoriEquipped = false;
 
-			PrisionScrollEquipped = false;
+			PrisonScrollEquipped = false;
 
 			LeachScarfEquipped = false;
 			VampireScarfEquipped = false;
 			
 			LunaticAmuletEquipped = false;
+
+			ForgottenEarringEquipped = false;
+			WasLSSLastTick = LastStandStaggered;
+			LastStandStaggered = false;
 		}
 
 		public override void PreUpdate()
 		{
-			if (PrisionScrollActiveness > 0) PrisionScrollActiveness -= 1;
+			if (PrisonScrollActiveness > 0) PrisonScrollActiveness -= 1;
 			if (LeachScarfPunishment > 0) LeachScarfPunishment -= 1;
 			if (VampireScarfPunishment > 0) VampireScarfPunishment -= 1;
+
+			if (ForgottenEarringCharge > 100) ForgottenEarringCharge = 100;
+			if (ForgottenEarringEquipped && ForgottenEarringCharge < 100)
+			{
+				ForgottenEarringCharge += 0.01f;
+				if (UsingMeleeWeapon && CombatTimer > 0) ForgottenEarringCharge += 0.01f;
+			}
+			else if (!ForgottenEarringEquipped) ForgottenEarringCharge = 0;
+
+			if (CombatTimer > 0) CombatTimer -= 1;
+			if (ForgottenEarringEquipped) ForgottenEarringGracePeriod = 0;
+		}
+		public override void PostUpdate()
+		{
+			if (WasLSSLastTick && !LastStandStaggered && ForgottenEarringEquipped)
+			{ // Staggered has ended
+				SoundEngine.PlaySound(PlayerExtendSound, Player.position);
+				Player.Heal(Player.statLifeMax2 / 2);
+				Player.AddBuff(ModContent.BuffType<LastStand>(), 1200);
+			}
 		}
 		public override void UpdateDead()
 		{
-			PrisionScrollActiveness = 0;
+			PrisonScrollActiveness = 0;
 		}
 		public override void UpdateEquips()
 		{
@@ -76,6 +114,8 @@ namespace LimeAccessories
 		}
 		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
+			CombatTimer = 60;
+			// Lifesteal with Vampire scarf or Leach scarf
 			if ((LeachScarfEquipped || VampireScarfEquipped) && target.canGhostHeal 
 				&& Player.statLife < Player.statLifeMax2 && !Player.dead)
 			{
@@ -89,14 +129,20 @@ namespace LimeAccessories
 				if (attemptedHeal > 0) Player.Heal(attemptedHeal);
 			}
 			// Punish not using summon weapons with prison scroll
-			if (PrisionScrollEquipped && 
+			if (PrisonScrollEquipped && 
 				!(hit.DamageType == DamageClass.Summon || hit.DamageType == DamageClass.SummonMeleeSpeed || hit.DamageType == DamageClass.MagicSummonHybrid))
 			{
-				PrisionScrollActiveness += 10;
+				PrisonScrollActiveness += 10;
 			}
+			// Check if we're using melee
+			if (hit.DamageType == DamageClass.Melee)
+				UsingMeleeWeapon = true;
+			else
+				UsingMeleeWeapon = false;
 		}
 		public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
 		{
+			CombatTimer = 60;
 			// Ranged
 			if (LunaticAmuletEquipped && proj.type != ModContent.ProjectileType<MadnessBullet>() // Dont let it trigger itself
 				&& hit.Crit && Player.ownedProjectileCounts[ModContent.ProjectileType<MadnessBullet>()] < 16
@@ -174,6 +220,29 @@ namespace LimeAccessories
 			if (OmamoriEquipped != 0)
 			{
 				modifiers.SetMaxDamage((int)(MathF.Round(Player.statLifeMax2 / 100f * OmamoriEquipped)));
+			}
+		}
+		public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genDust, ref PlayerDeathReason damageSource)
+		{
+			// Immune to death due to stagger
+			if ((WasLSSLastTick || LastStandStaggered) && (ForgottenEarringGracePeriod < 5 || ForgottenEarringEquipped))
+			{
+				playSound = false;
+				genDust = false;
+				Player.statLife = 5;
+				return false;
+			}
+			// Interupt death due to forgotten earring
+			if (ForgottenEarringCharge >= 100 && ForgottenEarringEquipped)
+			{
+				SoundEngine.PlaySound(PlayerDeathSound);
+				ForgottenEarringCharge = 0;
+				Player.AddBuff(ModContent.BuffType<Staggered>(), 120);
+				Player.statLife = 5;
+				return false;
+			} else
+			{
+				return true;
 			}
 		}
 	}
