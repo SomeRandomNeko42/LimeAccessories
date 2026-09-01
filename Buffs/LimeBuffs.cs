@@ -76,7 +76,7 @@ namespace LimeAccessories.Buffs
 				player.DelBuff(buffIndex);
 
 				// Setup the death messages
-				int deathMessage = Main.rand.Next(5);
+				int deathMessage = Main.rand.Next(7);
 				string key = "Mods.LimeAccessories.DeathMessages.RemovedEarRing_" + deathMessage.ToString();
 				NetworkText subject = NetworkText.FromLiteral(player.name);
 

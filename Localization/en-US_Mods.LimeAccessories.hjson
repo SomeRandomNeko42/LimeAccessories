@@ -304,10 +304,12 @@ Items: {
 
 DeathMessages: {
 	RemovedEarRing_0: "{0} decided to unequip the item currently keeping them alive."
-	RemovedEarRing_1: "{0} successfully stopped the magic trying to heal them."
+	RemovedEarRing_1: "{0} successfully stopped the magic trying to save them."
 	RemovedEarRing_2: "{0} was revived but killed themselves again to see what death was like."
 	RemovedEarRing_3: '''{0} pressed the button labeled "Die".'''
-	RemovedEarRing_4: "{0} was too distracted by their fashion choices in order to fight."
+	RemovedEarRing_4: "{0} was too distracted by their accessory choices in order to fight."
+	RemovedEarRing_5: "{0} took off one of their accessories and immediately learned why it was equipped in the first place."
+	RemovedEarRing_6: "{0} unequipped one of their accessories and discovered it was, in fact, important."
 }
 
 Configs: {
@@ -351,7 +353,7 @@ Buffs: {
 
 	Staggered: {
 		DisplayName: Staggered
-		Description: Its the end...?
+		Description: It's the end...?
 	}
 }
 

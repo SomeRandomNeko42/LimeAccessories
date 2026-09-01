@@ -125,7 +125,6 @@ namespace LimeAccessories.Items
 			Recipe recipe = CreateRecipe(1);
 			recipe.AddCondition(Condition.InGraveyard);
 			recipe.AddIngredient<Fetters>();
-			recipe.AddIngredient(ItemID.DestroyerEmblem, 1);
 			recipe.AddIngredient(ItemID.HallowedBar, 5);
 			recipe.AddIngredient(ItemID.ManaCrystal, 2);
 			recipe.AddTile(TileID.MythrilAnvil);

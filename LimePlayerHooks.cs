@@ -31,6 +31,7 @@ namespace LimeAccessories
 
 		public bool ForgottenEarringEquipped;
 		public int ForgottenEarringGracePeriod = 0; // The game will attempt to kill you when joining the game, this stops that
+													// Incremented by the condition
 		public float ForgottenEarringCharge;
 		public bool LastStandStaggered;
 		public bool WasLSSLastTick;
